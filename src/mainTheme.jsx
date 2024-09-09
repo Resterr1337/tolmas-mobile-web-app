@@ -16,15 +16,15 @@ const mainTheme = createTheme({
 	typography: {
 		fontFamily: ["Onest", "sans-serif"].join(","),
 		h1: {
-			fontSize: "1.5rem",
-			fontWeight: 700,
-		},
-		h2: {
 			fontSize: "1.25rem",
 			fontWeight: 700,
 		},
-		h3: {
+		h2: {
 			fontSize: "1rem",
+			fontWeight: 700,
+		},
+		h3: {
+			fontSize: "0.85rem",
 			fontWeight: 700,
 		},
 		h5: {
@@ -32,7 +32,7 @@ const mainTheme = createTheme({
 			fontWeight: 400,
 		},
 		h6: {
-			fontSize: "0.625rem",
+			fontSize: "0.5rem",
 			fontWeight: 700,
 		},
 		subtitle1: {

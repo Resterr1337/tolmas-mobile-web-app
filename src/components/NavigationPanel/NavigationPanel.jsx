@@ -14,9 +14,12 @@ import UserSVG from "@/assets/NavigationPanel/user.svg?react";
 import WishesSVG from "@/assets/NavigationPanel/wishes.svg?react";
 
 import "@/components/NavigationPanel/NavigationPanel.css"
+import { useNavigate } from "react-router-dom";
 
 const NavigationPanel = () => {
 	const [value, setValue] = useState(0);
+	const navigateFunc = useNavigate()
+	
 
 	return (
 		<>
@@ -27,9 +30,11 @@ const NavigationPanel = () => {
 					right: "0",
 					bottom: "0",
 					left: "0",
+					borderTop:"1px solid #00000050",
 				}}
-				onChange={(event, value) => {
-					setValue(value);
+				onChange={(event, newValue) => {
+					setValue(newValue);
+					navigateFunc(newValue)
 				}}
 				value={value}
 				showLabels

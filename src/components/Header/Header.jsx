@@ -14,6 +14,7 @@ const Header = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "space-between",
+					borderBottom:"1px solid #00000050",
 				}}
 			>
 				<Box
