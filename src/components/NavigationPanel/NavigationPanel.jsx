@@ -14,10 +14,10 @@ import UserSVG from "@/assets/NavigationPanel/user.svg?react";
 import WishesSVG from "@/assets/NavigationPanel/wishes.svg?react";
 
 import "@/components/NavigationPanel/NavigationPanel.css"
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const NavigationPanel = () => {
-	const [value, setValue] = useState(0);
+	const [value, setValue] = useState(useLocation().pathname);
 	const navigateFunc = useNavigate()
 	
 
@@ -27,6 +27,8 @@ const NavigationPanel = () => {
 				sx={{
 					width: "100%",
 					position: "fixed",
+					background: "#FFFFFF50",
+					backdropFilter: "blur(10px)",
 					right: "0",
 					bottom: "0",
 					left: "0",

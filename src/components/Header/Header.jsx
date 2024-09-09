@@ -10,11 +10,15 @@ const Header = () => {
 		<>
 			<Box
 				sx={{
-					mx: "0.35rem",
+					width: "100vw",
+					background: "#FFFFFF50",
+					backdropFilter: "blur(10px)",
+					position: "fixed",
+					px: "0.35rem",
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "space-between",
-					borderBottom:"1px solid #00000050",
+					borderBottom: "1px solid #00000050",
 				}}
 			>
 				<Box
@@ -31,7 +35,7 @@ const Header = () => {
 					>
 						Tolmas market
 					</Typography>
-					<Typography color="text.secondary" variant="h6">
+					<Typography color="text.secondary" variant="subtitle1">
 						Магазин аксессуаров и парфюмерии
 					</Typography>
 				</Box>
