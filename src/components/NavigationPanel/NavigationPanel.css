@@ -1,0 +1,27 @@
+.outline_path{
+    fill: #1F2024;
+}
+.outline_stroke{
+    stroke: #1F2024;
+}
+
+.fillness_path{
+    fill: none;
+}
+
+.fillness_stroke{
+    stroke: none;
+}
+
+.Mui-selected svg .outline_path{ 
+    fill: none;
+}
+.Mui-selected svg .outline_stroke{ 
+    stroke: none;
+}
+.Mui-selected svg .fillness_path{ 
+    fill: #1F2024;
+}
+.Mui-selected svg .fillness_stroke{ 
+    stroke: #1F2024;
+}

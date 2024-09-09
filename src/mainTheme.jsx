@@ -2,10 +2,16 @@ import { createTheme } from "@mui/material";
 
 const mainTheme = createTheme({
     palette:{
-        text: {
-            primary: "#000000",
-            secondary: "#1F2024",
-        }
+		primary: {
+			main: "#1F2024",
+		},
+		secondary: {
+			main: "#000000"
+		},
+		text:{
+			primary: "#1F2024",
+			secondary: "#000000"
+		}
     },
 	typography: {
 		fontFamily: ["Onest", "sans-serif"].join(","),
