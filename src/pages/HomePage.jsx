@@ -1,11 +1,12 @@
 import { Typography } from "@mui/material";
+import { PromoSlider } from "../components/HomePage/PromoSlider.jsx";
 
 const HomePage = () => {
-  return (
-    <>
-      <Typography variant="h3">Im Home page</Typography>
-    </>
-  );
+	return (
+		<>
+			<PromoSlider></PromoSlider>
+		</>
+	);
 };
 
 export { HomePage };

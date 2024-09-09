@@ -1,0 +1,19 @@
+.PromoSwiper {
+    border-radius: 1rem;
+    height: 20vh;
+}
+
+.swiper-slide{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-pagination-bullet{
+    border-radius: 0px;
+    width: 16px;
+    height: 4px;
+}
+.swiper-pagination-bullet-active{
+    background-color: #1F2024;
+}
