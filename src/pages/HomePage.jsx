@@ -1,10 +1,14 @@
-import { Typography } from "@mui/material";
+import { Typography , Box } from "@mui/material";
 import { PromoSlider } from "../components/HomePage/PromoSlider.jsx";
+import { SearchInput } from "../components/SearchInput/SearchInput.jsx";
 
 const HomePage = () => {
 	return (
 		<>
-			<PromoSlider imageArray={[]}></PromoSlider>
+			<PromoSlider></PromoSlider>
+			<Box sx={{my:"1rem"}}>
+				<SearchInput></SearchInput>
+			</Box>
 		</>
 	);
 };

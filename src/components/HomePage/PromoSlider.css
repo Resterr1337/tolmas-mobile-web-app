@@ -1,20 +1,16 @@
-.PromoSwiper {
-	height: 25vh;
-}
 
 .swiper-slide {
+	height: 180px;
     border-radius: 0.85rem;
-	background-color: gray;
+	background-color: rgb(219, 219, 219);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-.swiper-pagination {
-    transform: translateY(10px);
-}
+
 .swiper-pagination-bullet {
-    background-color: white;
+    background-color: rgb(159, 159, 159);
 	border-radius: 4px;
 	width: 6px;
 	height: 5px;
