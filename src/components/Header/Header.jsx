@@ -12,13 +12,14 @@ const Header = () => {
 				sx={{
 					width: "100vw",
 					background: "#FFFFFF50",
-					backdropFilter: "blur(10px)",
+					backdropFilter: "blur(3px)",
 					position: "fixed",
 					px: "0.35rem",
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "space-between",
 					borderBottom: "1px solid #00000050",
+					zIndex:"20",
 				}}
 			>
 				<Box

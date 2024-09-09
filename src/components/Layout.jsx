@@ -6,7 +6,7 @@ const Layout = () => {
 	return (
 		<>
 			<Header></Header>
-			<main style={{position:"absolute", top:"6.5vh" , width:"100vw" , padding:"10px"}}>
+			<main style={{position:"absolute", top:"6vh" , width:"100vw" , padding:"10px"}}>
 				<Outlet></Outlet>
 			</main>
 			<NavigationPanel></NavigationPanel>

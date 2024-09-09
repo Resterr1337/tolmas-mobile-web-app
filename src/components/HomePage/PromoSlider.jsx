@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Pagination , Autoplay} from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -13,11 +13,15 @@ const PromoSlider = () => {
 	return (
 		<>
 			<Swiper
-				modules={[Pagination]}
-				pagination={{type:"bullets", clickable:true}}
+				speed={1500}
+				autoplay={{delay:10000}}
+				modules={[Pagination, Autoplay]}
+				spaceBetween={30}
+				pagination={{ type: "bullets", clickable: true }}
 				className="PromoSwiper"
 			>
 				{imageArray.map((item, index) => (
+					// <SwiperSlide key={index}><img src={item.src}/></SwiperSlide>
 					<SwiperSlide key={index}>{item}</SwiperSlide>
 				))}
 			</Swiper>

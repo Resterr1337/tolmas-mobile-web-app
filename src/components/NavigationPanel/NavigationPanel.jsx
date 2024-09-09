@@ -33,6 +33,7 @@ const NavigationPanel = () => {
 					bottom: "0",
 					left: "0",
 					borderTop:"1px solid #00000050",
+					zIndex:"20",
 				}}
 				onChange={(event, newValue) => {
 					setValue(newValue);

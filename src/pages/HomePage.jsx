@@ -4,7 +4,7 @@ import { PromoSlider } from "../components/HomePage/PromoSlider.jsx";
 const HomePage = () => {
 	return (
 		<>
-			<PromoSlider></PromoSlider>
+			<PromoSlider imageArray={[]}></PromoSlider>
 		</>
 	);
 };
