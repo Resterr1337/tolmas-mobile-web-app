@@ -44,7 +44,7 @@ const PromoSlider = () => {
 			>
 				{imageArray.map((item, index) => (
 					// <SwiperSlide key={index}><img src={item.src}/></SwiperSlide>
-					<SwiperSlide key={index}>{item}</SwiperSlide>
+					<SwiperSlide className="promo-swiper-slide" key={index}>{item}</SwiperSlide>
 				))}
 			</Swiper>
 		</>

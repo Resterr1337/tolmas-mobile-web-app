@@ -1,0 +1,19 @@
+.categories-swiper-slide{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+
+.categories-swiper-slide  img{
+    border-radius: 10px;
+    height: 70%;
+    width: 100%;
+}
+
+.categories-swiper-slide a{
+    text-decoration: none;
+    font-weight: 700;
+    color: black;
+}
+.categories-swiper-slide 
