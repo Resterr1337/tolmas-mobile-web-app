@@ -11,7 +11,7 @@ export const CategoriesSlider = ({ categoriesArray }) => {
 		<>
 			<Swiper
 				className="categories_swiper_slider"
-				slidesPerView={3}
+				slidesPerView={4}
 				spaceBetween={25}
 			>
 				{categoriesArray.map((category, index) => {

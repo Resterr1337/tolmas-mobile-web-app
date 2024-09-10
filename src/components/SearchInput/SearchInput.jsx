@@ -1,5 +1,5 @@
 import "./SearchInput.css";
-import { TextField, Box, Typography, Input } from "@mui/material";
+import { Box, Input } from "@mui/material";
 import SearchSVG from "@/assets/SearchInput/search.svg?react";
 
 const SearchInput = () => {
