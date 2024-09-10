@@ -1,7 +1,11 @@
+.categories_swiper_slider{
+    height: 40%;
+}
+
 .categories-swiper-slide{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     
 }
 
@@ -12,8 +16,16 @@
 }
 
 .categories-swiper-slide a{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 400;
     color: black;
 }
-.categories-swiper-slide 
+.categories-swiper-slide h6{
+    margin-top: 0.65rem;
+    font-weight: 500;
+} 
