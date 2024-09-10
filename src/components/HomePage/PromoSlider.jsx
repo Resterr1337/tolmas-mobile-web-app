@@ -86,6 +86,7 @@ const PromoSlider = ({ promoArray }) => {
 													<Typography
 														color="white"
 														variant="h2"
+														fontSize={"1rem"}
 													>
 														{promo.text.centerText}
 													</Typography>
@@ -128,39 +129,43 @@ const PromoSlider = ({ promoArray }) => {
 											padding: "10px",
 										}}
 									>
-										{promo.text ? (
-											<>
+									{promo.text ? (
+										<>
+											<Typography
+												sx={{
+													width: "100%",
+												}}
+												color="white"
+												variant="h2"
+											>
+												{promo.text.topSideText}
+											</Typography>
+											<Box
+												sx={{
+													display: "flex",
+													flexDirection: "column",
+													justifyContent: "end",
+												}}
+											>
 												<Typography
-													sx={{
-														width: "70%",
-													}}
 													color="white"
 													variant="h2"
 												>
-													{promo.text.topSideText}
+													{promo.text.centerText}
 												</Typography>
-												<Box>
-													<Typography
-														color="white"
-														variant="h2"
-													>
-														{promo.text.centerText}
-													</Typography>
-													<Typography
-														color="white"
-														variant="h1"
-														fontSize={"4rem"}
-													>
-														{
-															promo.text
-																.bottomSideText
-														}
-													</Typography>
-												</Box>
-											</>
-										) : (
-											<></>
-										)}
+												<Typography
+													color="white"
+													variant="h1"
+													fontSize={"4rem"}
+												>
+													{
+														promo.text
+															.bottomSideText
+													}
+												</Typography>
+											</Box>
+										</>) : <></>
+									}
 									</Box>
 								</>
 							)}
