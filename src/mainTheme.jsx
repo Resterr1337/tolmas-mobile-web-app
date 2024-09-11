@@ -1,23 +1,24 @@
 import { createTheme } from "@mui/material";
 
 const mainTheme = createTheme({
-    palette:{
+	palette: {
 		primary: {
 			main: "#1F2024",
 		},
 		secondary: {
-			main: "#000000"
+			main: "#000000",
 		},
-		text:{
+		text: {
 			primary: "#1F2024",
-			secondary: "#000000"
-		}
-    },
+			secondary: "#000000",
+		},
+	},
 	typography: {
 		fontFamily: ["Onest", "sans-serif"].join(","),
 		h1: {
 			fontSize: "1.75rem",
 			fontWeight: 700,
+			lineHeight: "1",
 		},
 		h2: {
 			fontSize: "1.35rem",
@@ -51,11 +52,11 @@ const mainTheme = createTheme({
 			fontStyle: "normal",
 			lineHeight: "normal",
 		},
-		
+
 		discount: {
-            color: "red",
-            fontFamily: ["Onest", "sans-serif"].join(","),
-            fontSize: "0.75rem",
+			color: "red",
+			fontFamily: ["Onest", "sans-serif"].join(","),
+			fontSize: "0.75rem",
 			fontStyle: "normal",
 			fontWeight: 400,
 			lineHeight: "normal",

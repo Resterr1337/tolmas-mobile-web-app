@@ -68,7 +68,7 @@ const PromoSlider = ({ promoArray }) => {
 											flexDirection: "column",
 											justifyContent: "space-between",
 											alignItems: "start",
-											padding: "10px",
+											padding: "2px 8px",
 										}}
 									>
 										{promo.text ? (
@@ -126,7 +126,7 @@ const PromoSlider = ({ promoArray }) => {
 											flexDirection: "column",
 											justifyContent: "space-between",
 											alignItems: "start",
-											padding: "10px",
+											padding: "2px 8px",
 										}}
 									>
 									{promo.text ? (
