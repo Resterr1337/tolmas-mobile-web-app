@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import { Typography, Box } from "@mui/material";
 import { PromoSlider } from "../components/HomePage/PromoSlider.jsx";
 import { SearchInput } from "../components/SearchInput/SearchInput.jsx";
@@ -6,39 +8,48 @@ import { CategoriesSlider } from "../components/HomePage/CategoriesSlider.jsx";
 const HomePage = () => {
 	return (
 		<>
+			{/* Промо-слайдер */}
 			<PromoSlider
 				promoArray={[
 					{
 						link: "/some_discount",
-						imageSRC: "https://s3-alpha-sig.figma.com/img/cc94/bd16/5df35d982ee5a6228569a106a1b93bdf?Expires=1727049600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=A08PUaFoVah-6ga7cTNcmTwtgoXqeDjP6-U7FgruS3cAi6S-V-WOcwHr3uQmwuwYOUCrfxyZJZY6eY0nXUIgWx54d9q~~J48IRY2FpRfUJRk-8EVvcPexGyhP92I-Ln2NNqfQvWihlnxElPAMMXofY-c3ZvUCg-alKEzbutXSqkfVFEze199CB4WJx0ZNzsCEN7hmFTzBwxjdgmu2CWeGUyYkPdZISwjZw4sysu7oPywsTizmr03joVqZKHANY6IHiVtPFpkuD0m7j0FfpGTaee19gu6a7Vljkl7cdL47M-w4ICx3VBqlpveatJE82~lZEBee0kB3U~IchD8R~T2uQ__",
+						imageSRC:
+							"https://s3-alpha-sig.figma.com/img/cc94/bd16/5df35d982ee5a6228569a106a1b93bdf?Expires=1727049600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=A08PUaFoVah-6ga7cTNcmTwtgoXqeDjP6-U7FgruS3cAi6S-V-WOcwHr3uQmwuwYOUCrfxyZJZY6eY0nXUIgWx54d9q~~J48IRY2FpRfUJRk-8EVvcPexGyhP92I-Ln2NNqfQvWihlnxElPAMMXofY-c3ZvUCg-alKEzbutXSqkfVFEze199CB4WJx0ZNzsCEN7hmFTzBwxjdgmu2CWeGUyYkPdZISwjZw4sysu7oPywsTizmr03joVqZKHANY6IHiVtPFpkuD0m7j0FfpGTaee19gu6a7Vljkl7cdL47M-w4ICx3VBqlpveatJE82~lZEBee0kB3U~IchD8R~T2uQ__",
 						text: {
-							topSideText: "Заканчиваем неделю с большими скидками успей купить!",
+							topSideText:
+								"Заканчиваем неделю с большими скидками успей купить!",
 							centerText: "Чёрная пятница",
-							bottomSideText : "-50%",
-						}
+							bottomSideText: "-50%",
+						},
 					},
 					{
 						link: false,
-						imageSRC: "https://s9.stc.all.kpcdn.net/woman/wp-content/uploads/2022/07/20-luchshih-muzhskih-duhov-960x540-1-960x540.jpg",
+						imageSRC:
+							"https://s9.stc.all.kpcdn.net/woman/wp-content/uploads/2022/07/20-luchshih-muzhskih-duhov-960x540-1-960x540.jpg",
 						text: {
 							topSideText: "Скидки на мужскую парфюмерию",
-							bottomSideText:"-20%",
+							bottomSideText: "-20%",
 						},
 					},
 					{
 						link: "/some_discount",
-						imageSRC: "https://business.olx.ua/wp-content/uploads/2023/11/Obkladynka-1.png",
+						imageSRC:
+							"https://business.olx.ua/wp-content/uploads/2023/11/Obkladynka-1.png",
 						text: {
 							topSideText: "Осенние скидки",
 							centerText: "",
-							bottomSideText : "-25%",
+							bottomSideText: "-25%",
 						},
-					}
+					},
 				]}
 			></PromoSlider>
-			<Box sx={{ my: "1rem" }}>
+
+			{/* Поисковой */}
+			<Box sx={{ mb: "0.75rem" }}>
 				<SearchInput></SearchInput>
 			</Box>
+
+			{/* Блок с слайдером-категорий */}
 			<Box>
 				<Typography sx={{ mb: "10px" }} variant="h1">
 					Категории
@@ -77,6 +88,33 @@ const HomePage = () => {
 						},
 					]}
 				></CategoriesSlider>
+			</Box>
+
+			{/* Блок с товарами */}
+			{/* #Сделать динамическую смену товаров под категории */}
+			<Box>
+				<Box
+					sx={{
+						my: "10px",
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "space-between",
+					}}
+				>
+					<Typography variant="h1">Парфюмерия</Typography>
+					<Link>
+						<Typography
+							sx={{
+								cursor: "pointer",
+							}}
+							color="#2588FF"
+							fontWeight={400}
+							variant="h3"
+						>
+							Показать всё
+						</Typography>
+					</Link>
+				</Box>
 			</Box>
 		</>
 	);
