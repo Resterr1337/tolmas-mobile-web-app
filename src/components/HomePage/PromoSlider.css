@@ -1,10 +1,10 @@
 .PromoSwiper {
-	height: 20vh;
+	height: 200px;
 }
 
 .promo-swiper-slide {
 	border-radius: 0.85rem;
-	height: 18.5vh;
+	height: 92.5%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
