@@ -14,7 +14,7 @@ const Header = () => {
 					background: "#FFFFFF50",
 					backdropFilter: "blur(3px)",
 					position: "fixed",
-					px: "0.35rem",
+					padding: "10px",
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "space-between",
