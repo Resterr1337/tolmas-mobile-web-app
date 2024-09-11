@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import "./Product.css";
 
 const Product = () => {
@@ -20,7 +20,7 @@ const Product = () => {
 			uzb: "Tasavvur qiling, siz cheksiz kosmosning chekkasida turibsiz, yulduzlar hech qachon bo'lmaganidek yorqin porlaydi va galaktikalar maftunkor raqsda aylanib yuradi. Havo uzoq yulduz tizimlari va sirli tumanliklarning hidi bilan to'yingan. Biz aynan shu og'irsizlik va cheksizlik hissiyotini yangi erkaklar atirlarimizda ifoda etishni xohladik.",
 		},
 		price: 1680000, // int
-		discount: 15, // bool || int
+		discount: "15%", // bool || str
 		quantity: 50, // int
 		quantityWeekSales: 4, // int || bool
 		characteristics: {
@@ -103,14 +103,70 @@ const Product = () => {
 		},
 	};
 
-	return <Box sx={{
-        width: "31.5%",
-        height: "210px",
-        backgroundColor:"#00000050",
-        mb: '2.5%',
-    }}>
-
-    </Box>;
+	return (
+		<Box
+			sx={{
+				width: "31.5%",
+				height: "210px",
+				display: "flex",
+				flexDirection: "column",
+				justifyContent: "space-between",
+			}}
+		>
+			{/* Изображение */}
+			<Box
+				sx={{
+					backgroundImage: `url("${productInfo.imageList[0]}")`,
+					backgroundPosition: "50% 50%",
+					backgroundSize: "cover",
+					backgroundRepeat: "no-repeat",
+					borderRadius: "0.3125rem",
+					width: "100%",
+					height: "70%",
+				}}
+			></Box>
+			<Box
+				sx={{
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "space-between",
+					alignContent: "start",
+				}}
+			>
+				<Typography variant="h3">{productInfo.name.rus}</Typography>
+				{productInfo.discount ? (
+					<>
+						<Typography
+							sx={{ textDecoration: "line-through" }}
+							variant="oldprice"
+						>
+							{productInfo.price}
+						</Typography>
+						<Typography variant="price">
+							{productInfo.price -
+								(productInfo.discount.includes("%")
+									? productInfo.price *
+									  parseFloat(
+											`0.${productInfo.discount.substring(
+												0,
+												productInfo.discount.indexOf(
+													"%"
+												)
+											)}`
+									  )
+									: parseInt(productInfo.discount))}
+						</Typography>
+					</>
+				) : (
+					<>
+						<Typography variant="price">
+							{productInfo.price}
+						</Typography>
+					</>
+				)}
+			</Box>
+		</Box>
+	);
 };
 
 export { Product };

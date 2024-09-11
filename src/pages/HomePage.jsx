@@ -120,10 +120,15 @@ const HomePage = () => {
 				{/* Сами продукты */}
 				<Box sx={{
 					display: "flex",
-					justifyContent: "space-between",
+					justifyContent: "start",
+					gap:"2.5%",
 					alignItems:"start",
 					flexWrap: "wrap",
 				}}>
+					<Product></Product>
+					<Product></Product>
+					<Product></Product>
+					<Product></Product>
 					<Product></Product>
 					<Product></Product>
 					<Product></Product>
