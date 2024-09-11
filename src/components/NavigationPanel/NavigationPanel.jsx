@@ -27,7 +27,7 @@ const NavigationPanel = () => {
 				sx={{
 					width: "100%",
 					position: "fixed",
-					background: "#FFFFFF50",
+					background: "#FFFFFF80",
 					backdropFilter: "blur(10px)",
 					right: "0",
 					bottom: "0",

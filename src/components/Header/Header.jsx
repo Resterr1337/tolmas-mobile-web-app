@@ -11,8 +11,8 @@ const Header = () => {
 			<Box
 				sx={{
 					width: "100vw",
-					background: "#FFFFFF90",
-					backdropFilter: "blur(5px)",
+					background: "#FFFFFF99",
+					backdropFilter: "blur(15px)",
 					position: "fixed",
 					padding: "7px 10px",
 					display: "flex",

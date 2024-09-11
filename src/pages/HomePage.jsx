@@ -128,6 +128,12 @@ const HomePage = () => {
 					<Product></Product>
 					<Product></Product>
 					<Product></Product>
+					<Product></Product>
+					<Product></Product>
+					<Product></Product>
+					<Product></Product>
+					<Product></Product>
+					<Product></Product>
 				</Box>
 			</Box>
 		</>
