@@ -12,7 +12,7 @@ export const CategoriesSlider = ({ categoriesArray }) => {
 			<Swiper
 				className="categories_swiper_slider"
 				slidesPerView={4}
-				spaceBetween={25}
+				spaceBetween={18}
 			>
 				{categoriesArray.map((category, index) => {
 					return (
@@ -29,7 +29,6 @@ export const CategoriesSlider = ({ categoriesArray }) => {
 						</SwiperSlide>
 					);
 				})}
-				<SwiperSlide className="categories-swiper-slide"></SwiperSlide>
 			</Swiper>
 		</>
 	);

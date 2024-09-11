@@ -1,12 +1,11 @@
 .categories_swiper_slider{
-    height: 40%;
+    height: 100%;
 }
 
 .categories-swiper-slide{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
 }
 
 .categories-swiper-slide  img{
