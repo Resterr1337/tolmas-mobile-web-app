@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import HeartSVG from "@/assets/Product/heart.svg?react";
 import "./Product.css";
 
 const Product = () => {
@@ -103,9 +104,15 @@ const Product = () => {
 		},
 	};
 
+    // #Доделать добавление в виш лист
+	const addToWishList = (event) => {
+		event.currentTarget.classList.toggle("in_wish_list");
+	};
+
 	return (
 		<Box
 			sx={{
+				my: "1.25%",
 				width: "31.5%",
 				height: "210px",
 				display: "flex",
@@ -116,15 +123,36 @@ const Product = () => {
 			{/* Изображение */}
 			<Box
 				sx={{
-					backgroundImage: `url("${productInfo.imageList[0]}")`,
+					backgroundImage: `url("${productInfo.imageList[1]}")`,
 					backgroundPosition: "50% 50%",
 					backgroundSize: "cover",
 					backgroundRepeat: "no-repeat",
 					borderRadius: "0.3125rem",
 					width: "100%",
 					height: "70%",
+					position: "relative",
 				}}
-			></Box>
+			>
+				{/* Cердечко */}
+				<Box
+					onClick={addToWishList}
+					
+                    sx={{
+						position: "absolute",
+						top: "5px",
+						right: "5px",
+                        cursor: "pointer",
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "center",
+						backgroundColor: "#1F2024",
+						borderRadius: "50%",
+						padding: "5px",
+					}}
+				>
+					<HeartSVG></HeartSVG>
+				</Box>
+			</Box>
 			<Box
 				sx={{
 					display: "flex",

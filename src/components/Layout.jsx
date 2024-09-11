@@ -16,10 +16,13 @@ const Layout = () => {
 				}}
 			>
 				<Outlet></Outlet>
+
+				{/* Компенсация Панели навигации снизу */}
 				<Box
 					sx={{
 						width: "100%",
 						height: "62px",
+						opacity:"0.0",
 					}}
 				></Box>
 			</main>
