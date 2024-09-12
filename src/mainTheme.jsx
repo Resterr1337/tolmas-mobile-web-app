@@ -28,6 +28,10 @@ const mainTheme = createTheme({
 			fontSize: "1rem",
 			fontWeight: 700,
 		},
+		h4: {
+			fontSize: "1rem",
+			fontWeight: 400,
+		},
 		h5: {
 			fontSize: "0.625rem",
 			fontWeight: 400,
@@ -37,10 +41,12 @@ const mainTheme = createTheme({
 			fontWeight: 800,
 		},
 		subtitle1: {
-			fontSize: "0.75rem",
+			fontSize: "0.85rem",
+			lineHeight: "normal",
 			fontWeight: 400,
 		},
 		suptitle2: {
+			lineHeight: "normal",
 			fontSize: "1rem",
 			fontWeight: 400,
 		},
@@ -59,6 +65,15 @@ const mainTheme = createTheme({
 			fontSize: "0.75rem",
 			fontStyle: "normal",
 			fontWeight: 400,
+			lineHeight: "normal",
+		},
+
+		quantity: {
+			color: "#21D399",
+			fontFamily: ["Onest", "sans-serif"].join(","),
+			fontSize: "0.8rem",
+			fontStyle: "normal",
+			fontWeight: 700,
 			lineHeight: "normal",
 		},
 	},

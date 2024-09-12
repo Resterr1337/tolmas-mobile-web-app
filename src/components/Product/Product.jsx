@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { formatPrice } from "../../utils/priceFormatter";
 
 import HeartSVG from "@/assets/Product/heart.svg?react";
 import "./Product.css";
@@ -22,9 +23,6 @@ const Product = () => {
 		event.currentTarget.classList.toggle("in_wish_list");
 	};
 
-	const numberWithSpaces = (x) => {
-		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-	};
 
 	const productInfo = {
 		id: 0, // num
@@ -142,7 +140,7 @@ const Product = () => {
 			{/* Изображение */}
 			<Box
 				sx={{
-					backgroundImage: `url("${productInfo.imageList[1]}")`,
+					backgroundImage: `url("${productInfo.imageList[0]}")`,
 					backgroundPosition: "50% 50%",
 					backgroundSize: "cover",
 					backgroundRepeat: "no-repeat",
@@ -192,13 +190,13 @@ const Product = () => {
 							}}
 							variant="oldprice"
 						>
-							{numberWithSpaces(productInfo.price) + " UZS"}
+							{formatPrice(productInfo.price) + " UZS"}
 						</Typography>
 						<Typography
 							sx={{ letterSpacing: "-1px" }}
 							variant="price"
 						>
-							{numberWithSpaces(
+							{formatPrice(
 								productInfo.price -
 									(productInfo.discount.includes("%")
 										? productInfo.price *
@@ -221,7 +219,7 @@ const Product = () => {
 							sx={{ letterSpacing: "-1px" }}
 							variant="price"
 						>
-							{numberWithSpaces(productInfo.price) + " UZS"}
+							{formatPrice(productInfo.price) + " UZS"}
 						</Typography>
 					</>
 				)}

@@ -21,9 +21,11 @@
 	border-radius: 4px;
 	width: 6px;
 	height: 5px;
+	transition: all 1000ms;
 }
 
 .swiper-pagination-bullet-active {
+	transition: all 1000ms;
 	background-color: #1f2024;
 	width: 24px;
 	height: 5px;
