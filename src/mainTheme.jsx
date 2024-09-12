@@ -21,6 +21,7 @@ const mainTheme = createTheme({
 			lineHeight: "1",
 		},
 		h2: {
+			lineHeight: "normal",
 			fontSize: "1.35rem",
 			fontWeight: 700,
 		},

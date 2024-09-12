@@ -1,11 +1,16 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Button } from "@mui/material";
 
 import { ImageSlider } from "../components/ProductPage/ImageSlider.jsx";
 import { formatPrice } from "../utils/priceFormatter.js";
 import CartSVG from "@/assets/ProductPage/cart.svg?react";
+import AddSVG from "@/assets/ProductPage/next.svg?react";
+import SubstractSVG from "@/assets/ProductPage/prev.svg?react";
 
 const ProductPage = () => {
+	const [quantityOrder, setQuantityOrder] = useState(0);
+
 	const { id: productId } = useParams();
 	// const productInfo = some_products[productId]
 	const productInfo = {
@@ -208,18 +213,121 @@ const ProductPage = () => {
 					<Box
 						key={index}
 						sx={{
-							my: "2px",
+							my: "10px",
 							width: "100%",
 							display: "flex",
 							justifyContent: "space-between",
 							alignContent: "center",
 						}}
 					>
-						<Typography variant="subtitle1">{item.title}</Typography>
-						<Typography variant="subtitle1">{item.value}</Typography>
+						<Typography sx={{ width: "50%" }} variant="subtitle1">
+							{item.title}
+						</Typography>
+						<Typography
+							sx={{ width: "50%", textAlign: "end" }}
+							variant="subtitle1"
+						>
+							{item.value}
+						</Typography>
 					</Box>
 				);
 			})}
+
+			{/* Кнопка добавления в корзину */}
+			<Box
+				sx={{
+					zIndex: "3",
+					position: "fixed",
+					bottom: "60px",
+					right: "0px",
+					width: "100vw",
+					height: "50px",
+					padding: "0px 10px",
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+				}}
+			>
+				<Box
+					sx={{
+						width: "100%",
+						height: "100%",
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "space-between",
+						gap:"10px",
+					}}
+				>
+					<Box
+						sx={{
+							height: "100%",
+							width: "120px",
+							border: "solid 1px #677697",
+							borderRadius: "8px",
+							backgroundColor: "#FFFFFF",
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "space-between",
+						}}
+					>
+						<button
+							style={{
+								height: "100%",
+								padding: "0px 6px",
+								border: "none",
+								outline: "none",
+								background: "none",
+							}}
+							onClick={() => {
+								quantityOrder
+									? setQuantityOrder(quantityOrder - 1)
+									: quantityOrder;
+							}}
+						>
+							<SubstractSVG />
+						</button>
+						<Typography color="#1F2024" variant="h2">
+							{quantityOrder}
+						</Typography>
+						<button
+							style={{
+								height: "100%",
+								padding: "0px 6px",
+								border: "none",
+								outline: "none",
+								background: "none",
+							}}
+							onClick={() => {
+								quantityOrder < productInfo.quantity
+									? setQuantityOrder(quantityOrder + 1)
+									: quantityOrder;
+							}}
+						>
+							<AddSVG />
+						</button>
+					</Box>
+
+					<Box
+						sx={{
+							background: "#677697",
+							height: "100%",
+							width:'100%',
+							borderRadius:"8px"
+						}}
+					>
+
+					</Box>
+				</Box>
+			</Box>
+
+			{/* Компенсатор кнопок добавления в Корзину */}
+			<Box
+				sx={{
+					width: "100%",
+					height: "40px",
+					opacity: "0.0",
+				}}
+			></Box>
 		</>
 	);
 };
