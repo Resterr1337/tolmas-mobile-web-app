@@ -7,6 +7,7 @@ import { MyOrdersPage } from "./pages/MyOrdersPage.jsx";
 import { MyCartPage } from "./pages/MyCartPage.jsx";
 import { UserInfoPage } from "./pages/UserInfoPage.jsx";
 import { Layout } from "./components/Layout.jsx";
+import { ProductPage } from "./pages/ProductPage.jsx";
 
 // Доделать роутинг
 const router = createBrowserRouter([
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path:"product/:id",
+        element: <ProductPage/>
       },
       {
         path:"mywishes",

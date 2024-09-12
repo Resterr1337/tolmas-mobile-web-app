@@ -1,11 +1,30 @@
 import { Box, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
 import HeartSVG from "@/assets/Product/heart.svg?react";
 import "./Product.css";
 
 const Product = () => {
-	function numberWithSpaces(x) {
+	const naviteToProductPage = useNavigate();
+
+	const handleProductCardClick = (event) => {
+
+		if (event.target.classList.value.includes("wish")) {
+			
+		} else {
+			naviteToProductPage(`product/${productInfo.id}`);
+		}
+	};
+
+	// #Доделать добавление в виш лист
+	const addToWishList = (event) => {
+		console.log('123')
+		event.currentTarget.classList.toggle("in_wish_list");
+	};
+
+	const numberWithSpaces = (x) => {
 		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-	}
+	};
 
 	const productInfo = {
 		id: 0, // num
@@ -108,13 +127,9 @@ const Product = () => {
 		},
 	};
 
-	// #Доделать добавление в виш лист
-	const addToWishList = (event) => {
-		event.currentTarget.classList.toggle("in_wish_list");
-	};
-
 	return (
 		<Box
+			onClick={handleProductCardClick}
 			sx={{
 				my: "1.25%",
 				width: "31.5%",
@@ -139,6 +154,7 @@ const Product = () => {
 			>
 				{/* Cердечко */}
 				<Box
+					className="wishSVG"
 					onClick={addToWishList}
 					sx={{
 						zIndex: "2",
@@ -152,9 +168,10 @@ const Product = () => {
 						backgroundColor: "#1F2024",
 						borderRadius: "50%",
 						padding: "5px",
+						
 					}}
 				>
-					<HeartSVG></HeartSVG>
+					<HeartSVG className="wishSVG"></HeartSVG>
 				</Box>
 			</Box>
 			<Box
@@ -177,7 +194,10 @@ const Product = () => {
 						>
 							{numberWithSpaces(productInfo.price) + " UZS"}
 						</Typography>
-						<Typography sx={{letterSpacing:"-1px"}} variant="price">
+						<Typography
+							sx={{ letterSpacing: "-1px" }}
+							variant="price"
+						>
 							{numberWithSpaces(
 								productInfo.price -
 									(productInfo.discount.includes("%")
@@ -197,7 +217,10 @@ const Product = () => {
 					</>
 				) : (
 					<>
-						<Typography sx={{letterSpacing:"-1px"}} variant="price">
+						<Typography
+							sx={{ letterSpacing: "-1px" }}
+							variant="price"
+						>
 							{numberWithSpaces(productInfo.price) + " UZS"}
 						</Typography>
 					</>
