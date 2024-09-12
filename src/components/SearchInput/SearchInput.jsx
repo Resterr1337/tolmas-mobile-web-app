@@ -17,15 +17,21 @@ const SearchInput = () => {
 				<SearchSVG></SearchSVG>
 				<Input
 					sx={{
-						ml:"1rem",
-						py:"0.75rem",
+						ml: "1rem",
+						py: "0.75rem",
 						fontFamily: "Onest , sans-serif",
-						fontSize:"1rem",
-						fontWeight:"400",
-						color:"#1F2024",
-						"&::placeholder":{
-							color:"black"	
-						}
+						fontSize: "1rem",
+						fontWeight: "400",
+						color: "#1F2024",
+						"&::placeholder": {
+							color: "black",
+						},
+						"&&&:before": {
+							borderBottom: "none",
+						},
+						"&&:after": {
+							borderBottom: "none",
+						},
 					}}
 					fullWidth={true}
 					placeholder="Поиск товаров"

@@ -48,7 +48,7 @@ const mainTheme = createTheme({
 		price: {
 			fontFamily: ["Onest", "sans-serif"].join(","),
 			fontSize: "1rem",
-			fontWeight: 700,
+			fontWeight: 500,
 			fontStyle: "normal",
 			lineHeight: "normal",
 		},

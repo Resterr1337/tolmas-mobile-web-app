@@ -3,6 +3,10 @@ import HeartSVG from "@/assets/Product/heart.svg?react";
 import "./Product.css";
 
 const Product = () => {
+	function numberWithSpaces(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+	}
+
 	const productInfo = {
 		id: 0, // num
 		category: "parfume", // str
@@ -21,7 +25,7 @@ const Product = () => {
 			uzb: "Tasavvur qiling, siz cheksiz kosmosning chekkasida turibsiz, yulduzlar hech qachon bo'lmaganidek yorqin porlaydi va galaktikalar maftunkor raqsda aylanib yuradi. Havo uzoq yulduz tizimlari va sirli tumanliklarning hidi bilan to'yingan. Biz aynan shu og'irsizlik va cheksizlik hissiyotini yangi erkaklar atirlarimizda ifoda etishni xohladik.",
 		},
 		price: 1680000, // int
-		discount: "15%", // bool || str
+		discount: "150000", // bool || str
 		quantity: 50, // int
 		quantityWeekSales: 4, // int || bool
 		characteristics: {
@@ -104,7 +108,7 @@ const Product = () => {
 		},
 	};
 
-    // #Доделать добавление в виш лист
+	// #Доделать добавление в виш лист
 	const addToWishList = (event) => {
 		event.currentTarget.classList.toggle("in_wish_list");
 	};
@@ -136,12 +140,12 @@ const Product = () => {
 				{/* Cердечко */}
 				<Box
 					onClick={addToWishList}
-					
-                    sx={{
+					sx={{
+						zIndex: "2",
 						position: "absolute",
 						top: "5px",
 						right: "5px",
-                        cursor: "pointer",
+						cursor: "pointer",
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "center",
@@ -165,30 +169,36 @@ const Product = () => {
 				{productInfo.discount ? (
 					<>
 						<Typography
-							sx={{ textDecoration: "line-through" }}
+							sx={{
+								textDecoration: "line-through",
+								letterSpacing: "-1px",
+							}}
 							variant="oldprice"
 						>
-							{productInfo.price}
+							{numberWithSpaces(productInfo.price) + " UZS"}
 						</Typography>
-						<Typography variant="price">
-							{productInfo.price -
-								(productInfo.discount.includes("%")
-									? productInfo.price *
-									  parseFloat(
-											`0.${productInfo.discount.substring(
-												0,
-												productInfo.discount.indexOf(
-													"%"
-												)
-											)}`
-									  )
-									: parseInt(productInfo.discount))}
+						<Typography sx={{letterSpacing:"-1px"}} variant="price">
+							{numberWithSpaces(
+								productInfo.price -
+									(productInfo.discount.includes("%")
+										? productInfo.price *
+										  parseFloat(
+												`0.${productInfo.discount.substring(
+													0,
+													productInfo.discount.indexOf(
+														"%"
+													)
+												)}`
+										  )
+										: parseInt(productInfo.discount)) +
+									" UZS"
+							)}
 						</Typography>
 					</>
 				) : (
 					<>
-						<Typography variant="price">
-							{productInfo.price}
+						<Typography sx={{letterSpacing:"-1px"}} variant="price">
+							{numberWithSpaces(productInfo.price) + " UZS"}
 						</Typography>
 					</>
 				)}
