@@ -5,6 +5,7 @@ import { PromoSlider } from "@/components/HomePage/PromoSlider.jsx";
 import { SearchInput } from "@/components/SearchInput/SearchInput.jsx";
 import { CategoriesSlider } from "@/components/HomePage/CategoriesSlider.jsx";
 import { Product } from "@/components/Product/Product.jsx";
+import { some_products } from "../data";
 
 const HomePage = () => {
 	return (
@@ -118,18 +119,26 @@ const HomePage = () => {
 				</Box>
 
 				{/* Сами продукты */}
-				<Box sx={{
-					display: "flex",
-					justifyContent: "start",
-					gap:"2.5%",
-					alignItems:"start",
-					flexWrap: "wrap",
-				}}>
-					<Product></Product>
-					<Product></Product>
-					<Product></Product>
-					<Product></Product>
-					<Product></Product>
+				<Box
+					sx={{
+						display: "flex",
+						justifyContent: "start",
+						gap: "2.5%",
+						alignItems: "start",
+						flexWrap: "wrap",
+					}}
+				>
+					
+					{some_products.map((product, index) => {
+						return (
+							<>
+								<Product
+									key={index}
+									productInfo={product}
+								></Product>
+							</>
+						);
+					})}
 				</Box>
 			</Box>
 		</>
