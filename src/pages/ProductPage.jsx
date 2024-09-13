@@ -6,10 +6,13 @@ import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
 import { ImageSlider } from "../components/ProductPage/ImageSlider.jsx";
 import { formatPrice } from "../utils/priceFormatter.js";
 import { some_products } from "../data.js";
+import {useLanguage} from "@/store.js"
+
 import CartSVG from "@/assets/ProductPage/cart.svg?react";
 import BagSVG from "@/assets/ProductPage/bag.svg?react";
 import AddSVG from "@/assets/ProductPage/next.svg?react";
 import SubstractSVG from "@/assets/ProductPage/prev.svg?react";
+
 
 const ProductPage = () => {
 	const [isActivated, setIsActivated] = useState(false);
@@ -17,7 +20,7 @@ const ProductPage = () => {
 	const [quantityOrder, setQuantityOrder] = useState(0);
 
 	const productInfo = some_products[parseInt(productId)];
-	const currentLanguage = "rus";
+	const currentLanguage = useLanguage((state) => state.language)
 
 	// #Добавить реализацию добавления товара в корзину
 	const HandleClickOnAddToCart = ({ currentTarget }) => {

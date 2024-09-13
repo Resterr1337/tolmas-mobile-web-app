@@ -24,6 +24,7 @@ const NavigationPanel = () => {
 		<>
 			<BottomNavigation
 				sx={{
+					transition:"all 500ms",
 					width: "100%",
 					position: "fixed",
 					background: "#FFFFFF80",

@@ -4,9 +4,11 @@ import { formatPrice } from "../../utils/priceFormatter";
 
 import HeartSVG from "@/assets/Product/heart.svg?react";
 import "./Product.css";
+import {useLanguage} from "@/store.js"
 
 const Product = ({ productInfo }) => {
 	const naviteToProductPage = useNavigate();
+	const currentLanguage = useLanguage((state) => state.language)
 
 	const handleProductCardClick = (event) => {
 		if (event.target.classList.value.includes("wish")) {
@@ -74,8 +76,7 @@ const Product = ({ productInfo }) => {
 					alignContent: "start",
 				}}
 			>
-				{/* # Добавить реакцию на языки */}
-				<Typography variant="h3">{productInfo.name["rus"]}</Typography>
+				<Typography variant="h3">{productInfo.name[currentLanguage]}</Typography>
 				{productInfo.discount ? (
 					<>
 						<Typography

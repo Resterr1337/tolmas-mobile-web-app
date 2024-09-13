@@ -7,6 +7,7 @@ import "./CategoriesSlider.css";
 
 export const CategoriesSlider = ({ categoriesArray }) => {
 
+
 	return (
 		<>
 			<Swiper
