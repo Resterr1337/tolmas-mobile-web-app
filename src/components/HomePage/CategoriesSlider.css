@@ -1,5 +1,12 @@
 .categories_swiper_slider{
-    height: 100%;
+    height: 100px;
+    a{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
 }
 
 .categories-swiper-slide{
@@ -8,11 +15,6 @@
     justify-content: center;
 }
 
-.categories-swiper-slide  img{
-    border-radius: 10px;
-    height: 70%;
-    width: 100%;
-}
 
 .categories-swiper-slide a{
     width: 100%;

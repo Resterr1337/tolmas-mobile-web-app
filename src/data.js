@@ -17,7 +17,7 @@ const some_products = [
 			uzb: "Tasavvur qiling, siz cheksiz kosmosning chekkasida turibsiz, yulduzlar hech qachon bo'lmaganidek yorqin porlaydi va galaktikalar maftunkor raqsda aylanib yuradi. Havo uzoq yulduz tizimlari va sirli tumanliklarning hidi bilan to'yingan. Biz aynan shu og'irsizlik va cheksizlik hissiyotini yangi erkaklar atirlarimizda ifoda etishni xohladik.",
 		},
 		price: 1680000, // int
-		discount: "15000", // bool || str
+		discount: false, // bool || str
 		quantity: 50, // int
 		quantityWeekSales: 4, // int || bool
 		characteristics: {
@@ -200,22 +200,10 @@ const some_products = [
 	},
 ];
 
-const some_categories = [
-	{
-		src: "https://aromacode.ru/wa-data/public/photos/61/31/3161/3161.970.jpg",
-		title: "Парфюмерия",
-		link: "/category/parfume",
-	},
-	{
-		src: "https://img.mercedes-benz-kiev.com/data/main/aksesuari/11.jpeg",
-		title: "Акссесуары",
-		link: "/category/accesories",
-	},
-];
 
 const some_promo = [
 	{
-		link: "/some_discount",
+		link: "promo/dark_friday_promo",
 		imageSRC:
 			"https://s3-alpha-sig.figma.com/img/cc94/bd16/5df35d982ee5a6228569a106a1b93bdf?Expires=1727049600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=A08PUaFoVah-6ga7cTNcmTwtgoXqeDjP6-U7FgruS3cAi6S-V-WOcwHr3uQmwuwYOUCrfxyZJZY6eY0nXUIgWx54d9q~~J48IRY2FpRfUJRk-8EVvcPexGyhP92I-Ln2NNqfQvWihlnxElPAMMXofY-c3ZvUCg-alKEzbutXSqkfVFEze199CB4WJx0ZNzsCEN7hmFTzBwxjdgmu2CWeGUyYkPdZISwjZw4sysu7oPywsTizmr03joVqZKHANY6IHiVtPFpkuD0m7j0FfpGTaee19gu6a7Vljkl7cdL47M-w4ICx3VBqlpveatJE82~lZEBee0kB3U~IchD8R~T2uQ__",
 		text: {
@@ -249,7 +237,7 @@ const some_promo = [
 		},
 	},
 	{
-		link: "/some_discount",
+		link: "promo/some_discount",
 		imageSRC:
 			"https://business.olx.ua/wp-content/uploads/2023/11/Obkladynka-1.png",
 		text: {
@@ -267,152 +255,4 @@ const some_promo = [
 	},
 ];
 
-const parfume_subcategory = [
-	{
-		value: "forMen",
-		title: {
-			rus: "Для мужчин",
-			uzb: "Erkak uchun",
-		},
-		link: "subcategory/for_men",
-	},
-	{
-		value: "forWomen",
-		title: {
-			rus: "Для женщин",
-			uzb: "Ayollar uchun",
-		},
-		link: "subcategory/for_women",
-	},
-	{
-		value: "floral",
-		title: {
-			rus: "Цветочные ароматы",
-			uzb: "Gullar hidi",
-		},
-		link: "subcategory/floral",
-	},
-	{
-		value: "fruity",
-		title: {
-			rus: "Фруктовые ароматы",
-			uzb: "Meva hidi",
-		},
-		link: "subcategory/fruity",
-	},
-	{
-		value: "oriental",
-		title: {
-			rus: "Восточные ароматы",
-			uzb: "Sharqona hidi",
-		},
-		link: "subcategory/oriental",
-	},
-	{
-		value: "woody",
-		title: {
-			rus: "Древесные ароматы",
-			uzb: "Daraxt hidi",
-		},
-		link: "subcategory/woody",
-	},
-	{
-		value: "fresh",
-		title: {
-			rus: "Свежие ароматы",
-			uzb: "Toza hidi",
-		},
-		link: "subcategory/fresh",
-	},
-];
-
-const accesories_subcategory = [
-	{
-		value:"forMen",
-		title: {
-			rus: "Для мужчин",
-			uzb: "Erkak uchun",
-		},
-		link: "subcategory/for_men",
-	},
-	{
-		value: "forWomen",
-		title: {
-			rus: "Для женщин",
-			uzb: "Ayollar uchun",
-		},
-		link: "subcategory/for_women",
-	},
-	{
-		value:"watches",
-		title: {
-			rus: "Часы",
-			uzb: "Soatlar",
-		},
-		link: "subcategory/watches",
-	},
-	{
-		value:"glasses",
-		title: {
-			rus: "Очки",
-			uzb: "Ko'zoynaklar",
-		},
-		link: "subcategory/glasses",
-	},
-	{
-		value:"belts",
-		title: {
-			rus: "Ремни",
-			uzb: "Kamonlar",
-		},
-		link: "subcategory/belts",
-	},
-	{
-		value:"bags",
-		title: {
-			rus: "Сумки",
-			uzb: "Sumkalar",
-		},
-		link: "subcategory/bags",
-	},
-	{
-		value:"jewelry",
-		title: {
-			rus: "Ювелирные изделия",
-			uzb: "Zargarlik buyumlari",
-		},
-		link: "subcategory/jewelry",
-	},
-	{
-		value:"headwear",
-		title: {
-			rus: "Головные уборы",
-			uzb: "Bosh kiyimlar",
-		},
-		link: "subcategory/headwear",
-	},
-	{
-		value:"gadgets",
-		title: {
-			rus: "Гаджеты и аксессуары для гаджетов",
-			uzb: "Gadjetlar va gadjetlar uchun aksessuarlar",
-		},
-		link: "subcategory/gadgets",
-	},
-	{
-		value:"forHome",
-		title: {
-			rus: "Аксессуары для дома",
-			uzb: "Uy uchun aksessuarlar",
-		},
-		link: "subcategory/for_home",
-	},
-];
-
-export {
-	some_products,
-	some_categories,
-	some_promo,
-	parfume_subcategory,
-	accesories_subcategory,
-};
+export { some_products,  some_promo };

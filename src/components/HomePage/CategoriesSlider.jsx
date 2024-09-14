@@ -1,12 +1,13 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import "swiper/css";
 
 import "./CategoriesSlider.css";
+import { useLanguage } from "../../store";
 
 export const CategoriesSlider = ({ categoriesArray }) => {
-
+	const currentLanguage = useLanguage((store) => store.language)
 
 	return (
 		<>
@@ -22,9 +23,19 @@ export const CategoriesSlider = ({ categoriesArray }) => {
 							className="categories-swiper-slide"
 						>
 							<Link to={category.link}>
-								<img src={category.src} />
+								<Box
+									sx={{
+										width: "100%",
+										height: "90%",
+										backgroundImage: `url("${category.src}")`,
+										backgroundPosition: "50% 50%",
+										backgroundSize: "cover",
+										backgroundRepeat: "no-repeat",
+										borderRadius: "10px",
+									}}
+								></Box>
 								<Typography variant="subtitle1">
-									{category.title}
+									{category.title[currentLanguage]}
 								</Typography>
 							</Link>
 						</SwiperSlide>

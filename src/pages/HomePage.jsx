@@ -5,9 +5,12 @@ import { PromoSlider } from "@/components/HomePage/PromoSlider.jsx";
 import { SearchInput } from "@/components/SearchInput/SearchInput.jsx";
 import { CategoriesSlider } from "@/components/HomePage/CategoriesSlider.jsx";
 import { Product } from "@/components/Product/Product.jsx";
-import { some_products, some_categories, some_promo } from "../data";
+import { some_products, some_promo } from "../data";
+import { useCategories } from "../store";
 
 const HomePage = () => {
+	const categories = useCategories((state) => state.categories)
+
 	return (
 		<>
 			{/* Промо-слайдер */}
@@ -25,7 +28,7 @@ const HomePage = () => {
 				</Typography>
 				<CategoriesSlider
 					key={nanoid()}
-					categoriesArray={some_categories}
+					categoriesArray={categories}
 				></CategoriesSlider>
 			</Box>
 
