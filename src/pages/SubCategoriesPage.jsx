@@ -50,7 +50,7 @@ const SubCategoriesPage = () => {
 				{subCategories.map((item, index) => {
 					return (
 						<Box
-							onClick={()=> NavigateFunc(`/search/null/${item.value}`)}
+							onClick={()=> NavigateFunc(`/search/null/${subcategory}--${item.value}`)}
 
 							key={index}
 							sx={{

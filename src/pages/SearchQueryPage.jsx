@@ -12,10 +12,6 @@ const SearchQueryPage = () => {
 	const { search_query } = useParams();
 	const { filter } = useParams();
 
-	console.log(search_query);
-
-
-
 	return (
 		<>
 			<SearchInput
@@ -32,11 +28,18 @@ const SearchQueryPage = () => {
 				}}
 			>
 				{some_products.map((product) => {
-                    if (product.name[currentLanguage].toLowerCase().includes(search_query.toLowerCase())) {
-                        return (
-                            <Product key={nanoid()} productInfo={product}></Product>
-                        );
-                    }
+					if (
+						product.name[currentLanguage]
+							.toLowerCase()
+							.includes(search_query.toLowerCase())
+					) {
+						return (
+							<Product
+								key={nanoid()}
+								productInfo={product}
+							></Product>
+						);
+					}
 				})}
 			</Box>
 		</>

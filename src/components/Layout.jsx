@@ -10,9 +10,9 @@ const Layout = () => {
 			<main
 				style={{
 					position: "absolute",
-					top: "62.5px",
+					top: "50px",
 					width: "100vw",
-					padding: "10px",
+					padding: "18px 10px",
 				}}
 			>
 				<Outlet></Outlet>
@@ -21,7 +21,7 @@ const Layout = () => {
 				<Box
 					sx={{
 						width: "100%",
-						height: "62px",
+						height: "55px",
 						opacity:"0.0",
 					}}
 				></Box>
