@@ -25,7 +25,7 @@ const CategoriesPage = () => {
 							display: "flex",
 							alignItems: "center",
 							justifyContent: "space-between",
-							padding: "5px 10px",
+							padding: "5px 0px",
 							my: "5px",
 						}}
 						key={index}

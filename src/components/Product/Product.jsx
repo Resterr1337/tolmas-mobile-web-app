@@ -13,7 +13,7 @@ const Product = ({ productInfo }) => {
 	const handleProductCardClick = (event) => {
 		if (event.target.classList.value.includes("wish")) {
 		} else {
-			naviteToProductPage(`product/${productInfo.id}`);
+			naviteToProductPage(`/product/${productInfo.id}`);
 		}
 	};
 

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
 import { Typography, Box } from "@mui/material";
 import { PromoSlider } from "@/components/HomePage/PromoSlider.jsx";
@@ -9,21 +9,26 @@ import { some_products, some_promo } from "../data";
 import { useCategories } from "../store";
 
 const HomePage = () => {
-	const categories = useCategories((state) => state.categories)
+	const categories = useCategories((state) => state.categories);
+	const NavigationFunc = useNavigate();
 
 	return (
 		<>
 			{/* Промо-слайдер */}
 			<PromoSlider key={nanoid()} promoArray={some_promo}></PromoSlider>
 
-			{/* Поисковой */}
-			<Box key={nanoid()} sx={{ mb: "0.75rem" }}>
-				<SearchInput key={nanoid()} ></SearchInput>
+			{/* Поисковой блок*/}
+			<Box
+				onClick={() => NavigationFunc("/categories")}
+				key={nanoid()}
+				sx={{ mb: "0.75rem" }}
+			>
+				<SearchInput key={nanoid()}></SearchInput>
 			</Box>
 
 			{/* Блок с слайдером-категорий */}
 			<Box key={nanoid()}>
-				<Typography key={nanoid()}  sx={{ mb: "10px" }} variant="h1">
+				<Typography key={nanoid()} sx={{ mb: "10px" }} variant="h1">
 					Категории
 				</Typography>
 				<CategoriesSlider
@@ -33,7 +38,6 @@ const HomePage = () => {
 			</Box>
 
 			{/* Блок с товарами */}
-			{/* #Сделать динамическую смену товаров под категории */}
 			<Box key={nanoid()}>
 				<Box
 					key={nanoid()}
@@ -75,12 +79,10 @@ const HomePage = () => {
 				>
 					{some_products.map((product, index) => {
 						return (
-							<>
-								<Product
-									key={nanoid()}
-									productInfo={product}
-								></Product>
-							</>
+							<Product
+								key={nanoid()}
+								productInfo={product}
+							></Product>
 						);
 					})}
 				</Box>

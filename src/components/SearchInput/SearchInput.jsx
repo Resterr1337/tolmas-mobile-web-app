@@ -1,9 +1,13 @@
-import "./SearchInput.css";
 import { Box, Input } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import "./SearchInput.css";
 import SearchSVG from "@/assets/SearchInput/search.svg?react";
 
-const SearchInput = () => {
-	// Реализовать Всплывание с поиском
+const SearchInput = ({prevValue}) => {
+	const [value , setValue] = useState(prevValue || "")
+	const NavigateFunc = useNavigate();
+
 
 	return (
 		<>
@@ -16,6 +20,13 @@ const SearchInput = () => {
 			>
 				<SearchSVG></SearchSVG>
 				<Input
+					onInput={() => {
+						setValue(event.target.value)
+					}}
+					onBlur={() => {
+						const inputValue = event.target.value;
+						{inputValue? NavigateFunc("/search/" + inputValue): NavigateFunc("/categories")}
+					}}
 					sx={{
 						ml: "1rem",
 						py: "0.75rem",
@@ -35,6 +46,7 @@ const SearchInput = () => {
 					}}
 					fullWidth={true}
 					placeholder="Поиск товаров"
+					value={value}
 				></Input>
 			</Box>
 		</>

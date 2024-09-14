@@ -10,6 +10,7 @@ import { Layout } from "./components/Layout.jsx";
 import { ProductPage } from "./pages/ProductPage.jsx";
 import { CategoriesPage } from "./pages/CategoriesPage.jsx";
 import { SubCategoriesPage } from "./pages/SubCategoriesPage.jsx";
+import { SearchQueryPage } from "./pages/SearchQueryPage.jsx";
 
 // Доделать роутинг
 const router = createBrowserRouter([
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
 			{
 				index: true,
 				element: <HomePage/>,
+			},
+			{
+				path: "search/:search_query?/:filter?",
+				element: <SearchQueryPage/>,
 			},
 			{
 				path: "product/:id",

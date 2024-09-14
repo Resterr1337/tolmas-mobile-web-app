@@ -32,7 +32,7 @@ const SubCategoriesPage = () => {
 					cursor: "pointer",
 					display: "flex",
 					alignItems: "center",
-					padding: "10px 10px",
+					padding: "10px 0px",
 					gap: "15px",
 				}}
 			>
@@ -50,13 +50,15 @@ const SubCategoriesPage = () => {
 				{subCategories.map((item, index) => {
 					return (
 						<Box
+							onClick={()=> NavigateFunc(`/search/null/${item.value}`)}
+
 							key={index}
 							sx={{
 								cursor: "pointer",
 								display: "flex",
 								alignItems: "center",
 								justifyContent: "space-between",
-								padding: "25px 10px",
+								padding: "25px 0px",
 								my: "1px",
 							}}
 						>
