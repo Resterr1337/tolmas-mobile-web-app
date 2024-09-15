@@ -12,7 +12,7 @@ const useCategories = create((set) => ({
 	categories: [
 		{
 			src: "https://aromacode.ru/wa-data/public/photos/61/31/3161/3161.970.jpg",
-			title: {rus:"Парфюмерия", uzb: "Parfyumeriya"},
+			title: { rus: "Парфюмерия", uzb: "Parfyumeriya" },
 			link: "/subcategory/parfume",
 			subCategories: [
 				{
@@ -75,7 +75,7 @@ const useCategories = create((set) => ({
 		},
 		{
 			src: "https://img.mercedes-benz-kiev.com/data/main/aksesuari/11.jpeg",
-			title: {rus:"Аксессуары", uzb: "Aksessuarlar"},
+			title: { rus: "Аксессуары", uzb: "Aksessuarlar" },
 			link: "/subcategory/accesories",
 			subCategories: [
 				{
@@ -168,4 +168,20 @@ const useCategories = create((set) => ({
 		}),
 }));
 
-export { useLanguage, useCategories };
+const useWishList = create((set, get) => ({
+	wishList: [0],
+	addToWishList: (id) => {
+		const { wishList } = get();
+		set({
+			wishlist: wishList.push(id),
+		});
+	},
+	removeFromWishList: (id) => {
+		const { wishList } = get();
+		set({
+			wishList: wishList.filter((item) => item !== id),
+		});
+	},
+}));
+
+export { useLanguage, useCategories, useWishList };

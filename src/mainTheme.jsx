@@ -22,7 +22,7 @@ const mainTheme = createTheme({
 		},
 		h2: {
 			lineHeight: "normal",
-			fontSize: "1.35rem",
+			fontSize: "1.25rem",
 			fontWeight: 700,
 		},
 		h3: {

@@ -24,7 +24,7 @@ const router = createBrowserRouter([
 				element: <HomePage/>,
 			},
 			{
-				path: "search/:search_query?/:filter?",
+				path: "search/?",
 				element: <SearchQueryPage/>,
 			},
 			{

@@ -1,12 +1,55 @@
-import { Box, Input } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Box, Input, Typography } from "@mui/material";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
+import { nanoid } from "nanoid";
+import { Swiper, SwiperSlide } from "swiper/react";
+
 import "./SearchInput.css";
 import SearchSVG from "@/assets/SearchInput/search.svg?react";
+import { useCategories, useLanguage } from "../../store";
 
 const SearchInput = ({ prevValue }) => {
+	const currentLanguage = useLanguage((state) => state.language);
 	const [value, setValue] = useState(prevValue || "");
 	const NavigateFunc = useNavigate();
+
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	let subCategorisArr_query = searchParams.getAll("s");
+	const categoryName = searchParams.get("c");
+	const { categories } = useCategories();
+	const categoryArray = categories.find((item) =>
+		item.link.includes(categoryName)
+	);
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		if (value) {
+			NavigateFunc("/search/");
+			setSearchParams({ query: value });
+		} else {
+			NavigateFunc("/categories");
+		}
+	};
+
+	const handleSubCategoryClick = (item, event) => {
+		event.stopPropagation();
+		if (
+			event.currentTarget.classList.value.includes("subcategory-active")
+		) {
+			setSearchParams({
+				query: value,
+				c: categoryName,
+				s: subCategorisArr_query.filter((s)=> !(s.includes(item.value)))
+			});
+		} else {
+			setSearchParams({
+				query: value,
+				c: categoryName,
+				s: [...searchParams.getAll("s"), item.value],
+			});
+		}
+	};
 
 	return (
 		<>
@@ -15,16 +58,13 @@ const SearchInput = ({ prevValue }) => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "start",
+					border: "solid black #",
 				}}
 			>
 				<SearchSVG></SearchSVG>
 				<form
-					onSubmit={(event) => {
-						event.preventDefault();
-						value
-						? NavigateFunc("/search/" + value)
-						: NavigateFunc("/categories");
-					}}
+					autoComplete="false"
+					onSubmit={handleSubmit}
 					style={{
 						display: "flex",
 						alignItems: "center",
@@ -35,14 +75,7 @@ const SearchInput = ({ prevValue }) => {
 						onInput={() => {
 							setValue(event.target.value);
 						}}
-						onBlur={() => {
-							const inputValue = event.target.value;
-							{
-								inputValue
-									? NavigateFunc("/search/" + inputValue)
-									: NavigateFunc("/categories");
-							}
-						}}
+						onBlur={handleSubmit}
 						sx={{
 							ml: "1rem",
 							py: "0.75rem",
@@ -65,9 +98,40 @@ const SearchInput = ({ prevValue }) => {
 						value={value}
 					></Input>
 
-					<input style={{display:"none"}} type="submit" value="" />
+					<input style={{ display: "none" }} type="submit" value="" />
 				</form>
 			</Box>
+
+			{categoryArray ? (
+				<Swiper
+					slidesPerView={"auto"}
+					spaceBetween={5}
+					className="subcategory-swiper"
+				>
+					{categoryArray.subCategories.map((item) => {
+						return (
+							// "subcategory subcategory-active"
+							<SwiperSlide
+								key={nanoid()}
+								onClick={(event) =>
+									handleSubCategoryClick(item, event)
+								}
+								className={
+									searchParams
+										.getAll("s")
+										.includes(item.value)
+										? "subcategory subcategory-active"
+										: "subcategory"
+								}
+							>
+								<Typography variant="h4">
+									{item.title[currentLanguage]}
+								</Typography>
+							</SwiperSlide>
+						);
+					})}
+				</Swiper>
+			) : null}
 		</>
 	);
 };

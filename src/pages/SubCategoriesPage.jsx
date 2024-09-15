@@ -1,10 +1,9 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { useCategories, useLanguage } from "../store";
 import { SearchInput } from "../components/SearchInput/SearchInput";
 import { Box, Typography } from "@mui/material";
 import NextSVG from "@/assets/SubCategoriesPage/next.svg?react";
 import BackSVG from "@/assets/SubCategoriesPage/back.svg?react";
-
 
 const SubCategoriesPage = () => {
 	const { subcategory } = useParams();
@@ -14,7 +13,9 @@ const SubCategoriesPage = () => {
 		item.link.includes(subcategory)
 	);
 
-	const NavigateFunc = useNavigate()
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	const NavigateFunc = useNavigate();
 
 	return (
 		<Box
@@ -25,9 +26,10 @@ const SubCategoriesPage = () => {
 			}}
 		>
 			<SearchInput></SearchInput>
-
+			
+			{/* Вернуться ко всем категориям */}
 			<Box
-				onClick={()=> NavigateFunc("/categories")}
+				onClick={() => NavigateFunc("/categories")}
 				sx={{
 					cursor: "pointer",
 					display: "flex",
@@ -50,8 +52,10 @@ const SubCategoriesPage = () => {
 				{subCategories.map((item, index) => {
 					return (
 						<Box
-							onClick={()=> NavigateFunc(`/search/null/${subcategory}--${item.value}`)}
-
+							onClick={() => {
+								NavigateFunc("/search/");
+								setSearchParams({query:null, c:subcategory , s:item.value})
+							}}
 							key={index}
 							sx={{
 								cursor: "pointer",

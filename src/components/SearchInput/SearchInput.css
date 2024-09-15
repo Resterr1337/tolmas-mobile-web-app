@@ -1,8 +1,33 @@
-.SearchInput{
-    border: none;
-    outline: none;
-    padding: 0.5rem;
-    width: 100%;
+.SearchInput {
+	border: none;
+	outline: none;
+	padding: 0.5rem;
+	width: 100%;
 
-    font-family: "Onest sans-serif";
+	font-family: "Onest sans-serif";
+}
+
+.subcategory-swiper {
+	height: 36px;
+}
+
+.swiper-slide {
+	width: fit-content;
+}
+
+.subcategory {
+	text-align: center;
+	transition: background-color ease-in 300ms;
+	height: 100%;
+	border-radius: 5px !important;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 6px 25px;
+}
+
+.subcategory-active {
+	transition: background-color ease-in 300ms;
+	background: #677697;
+	color: white;
 }

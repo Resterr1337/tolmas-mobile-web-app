@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box , Input} from "@mui/material";
 import { PromoSlider } from "@/components/HomePage/PromoSlider.jsx";
-import { SearchInput } from "@/components/SearchInput/SearchInput.jsx";
+import SearchSVG from "@/assets/SearchInput/search.svg?react"
 import { CategoriesSlider } from "@/components/HomePage/CategoriesSlider.jsx";
 import { Product } from "@/components/Product/Product.jsx";
 import { some_products, some_promo } from "../data";
@@ -15,15 +15,44 @@ const HomePage = () => {
 	return (
 		<>
 			{/* Промо-слайдер */}
-			<PromoSlider key={nanoid()} promoArray={some_promo}></PromoSlider>
+			<PromoSlider  promoArray={some_promo}></PromoSlider>
 
 			{/* Поисковой блок*/}
 			<Box
 				onClick={() => NavigationFunc("/categories")}
-				key={nanoid()}
 				sx={{ mb: "0.75rem" }}
 			>
-				<SearchInput key={nanoid()}></SearchInput>
+							<Box
+				sx={{
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "start",
+					border: "solid black #",
+				}}
+			>
+				<SearchSVG></SearchSVG>
+					<Input
+						sx={{
+							ml: "1rem",
+							py: "0.75rem",
+							fontFamily: "Onest , sans-serif",
+							fontSize: "1rem",
+							fontWeight: "400",
+							color: "#1F2024",
+							"&::placeholder": {
+								color: "black",
+							},
+							"&&&:before": {
+								borderBottom: "none",
+							},
+							"&&:after": {
+								borderBottom: "none",
+							},
+						}}
+						fullWidth={true}
+						placeholder="Поиск товаров"
+					></Input>
+				</Box>
 			</Box>
 
 			{/* Блок с слайдером-категорий */}
@@ -68,7 +97,6 @@ const HomePage = () => {
 
 				{/* Сами продукты */}
 				<Box
-					key={nanoid()}
 					sx={{
 						display: "flex",
 						justifyContent: "start",

@@ -8,9 +8,7 @@ import { router } from "./mainRouter.jsx";
 import { mainTheme } from "./mainTheme.jsx";
 
 createRoot(document.getElementById("root")).render(
-	<StrictMode>
-		<ThemeProvider theme={mainTheme}>
-			<RouterProvider router={router}></RouterProvider>
-		</ThemeProvider>
-	</StrictMode>
+	<ThemeProvider theme={mainTheme}>
+		<RouterProvider router={router}></RouterProvider>
+	</ThemeProvider>
 );

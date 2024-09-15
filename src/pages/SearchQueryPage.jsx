@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
-import { Box } from "@mui/material";
+import { useSearchParams } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
 import { nanoid } from "nanoid";
 
 import { useLanguage, useCategories } from "../store";
@@ -9,16 +9,30 @@ import { some_products } from "../data";
 
 const SearchQueryPage = () => {
 	const currentLanguage = useLanguage((state) => state.language);
-	const { search_query } = useParams();
-	const { filter } = useParams();
+	const {categories} = useCategories()
+	
+	const [searchParams, setSearchParams] = useSearchParams();
+	const search_query = searchParams.get("query");
+
+	
+	const filteredProducts = some_products.filter((item) =>
+		item.name[currentLanguage].toLowerCase().includes(search_query.toLowerCase())
+	);
 
 	return (
 		<>
 			<SearchInput
 				prevValue={search_query == "null" ? "" : search_query}
 			></SearchInput>
+
+			<Box sx={{ display: "flex", alignItems: "end", gap: "4px" }}>
+				<Typography color={"#21D399"} variant="h2">
+					{filteredProducts.length}
+				</Typography>
+				<Typography variant="h3">Результата показано</Typography>
+			</Box>
+
 			<Box
-				key={nanoid()}
 				sx={{
 					display: "flex",
 					justifyContent: "start",
@@ -27,19 +41,10 @@ const SearchQueryPage = () => {
 					flexWrap: "wrap",
 				}}
 			>
-				{some_products.map((product) => {
-					if (
-						product.name[currentLanguage]
-							.toLowerCase()
-							.includes(search_query.toLowerCase())
-					) {
-						return (
-							<Product
-								key={nanoid()}
-								productInfo={product}
-							></Product>
-						);
-					}
+				{filteredProducts.map((product) => {
+					return (
+						<Product key={nanoid()} productInfo={product}></Product>
+					);
 				})}
 			</Box>
 		</>

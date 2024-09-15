@@ -4,13 +4,18 @@ import { formatPrice } from "../../utils/priceFormatter";
 
 import HeartSVG from "@/assets/Product/heart.svg?react";
 import "./Product.css";
-import {useLanguage} from "@/store.js"
+import { useLanguage, useWishList } from "@/store.js";
+import { useState } from "react";
 
 const Product = ({ productInfo }) => {
+	const {wishList, addToWishList, removeFromWishList} = useWishList();;
+	
+	const [isInWishList, setIsInWishList] = useState(wishList.includes(productInfo.id))
 	const naviteToProductPage = useNavigate();
-	const currentLanguage = useLanguage((state) => state.language)
+	const currentLanguage = useLanguage((state) => state.language);
 
 	const handleProductCardClick = (event) => {
+		event.stopPropagation()
 		if (event.target.classList.value.includes("wish")) {
 		} else {
 			naviteToProductPage(`/product/${productInfo.id}`);
@@ -18,8 +23,15 @@ const Product = ({ productInfo }) => {
 	};
 
 	// #Доделать добавление в виш лист
-	const addToWishList = (event) => {
-		event.currentTarget.classList.toggle("in_wish_list");
+	const handleClickOnHeart = (event) => {
+		event.stopPropagation()
+		if (event.currentTarget.classList.value.includes("in_wish_list")) {
+			setIsInWishList(false);
+			removeFromWishList(productInfo.id);
+		} else {
+			setIsInWishList(true);
+			addToWishList(productInfo.id);
+		}
 	};
 
 	return (
@@ -49,8 +61,8 @@ const Product = ({ productInfo }) => {
 			>
 				{/* Cердечко */}
 				<Box
-					className="wishSVG"
-					onClick={addToWishList}
+					className={isInWishList? "wishSVG in_wish_list": "wishSVG"}
+					onClick={handleClickOnHeart}
 					sx={{
 						zIndex: "2",
 						position: "absolute",
@@ -76,7 +88,9 @@ const Product = ({ productInfo }) => {
 					alignContent: "start",
 				}}
 			>
-				<Typography variant="h3">{productInfo.name[currentLanguage]}</Typography>
+				<Typography variant="h3">
+					{productInfo.name[currentLanguage]}
+				</Typography>
 				{productInfo.discount ? (
 					<>
 						<Typography
