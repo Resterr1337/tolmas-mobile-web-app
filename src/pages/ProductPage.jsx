@@ -12,9 +12,11 @@ import CartSVG from "@/assets/ProductPage/cart.svg?react";
 import BagSVG from "@/assets/ProductPage/bag.svg?react";
 import AddSVG from "@/assets/ProductPage/next.svg?react";
 import SubstractSVG from "@/assets/ProductPage/prev.svg?react";
+import { useCart } from "../store.js";
 
 
 const ProductPage = () => {
+	const { cartArray, addToCart} = useCart()
 	const [isActivated, setIsActivated] = useState(false);
 	const { id: productId } = useParams();
 	const [quantityOrder, setQuantityOrder] = useState(0);
@@ -23,10 +25,11 @@ const ProductPage = () => {
 	const currentLanguage = useLanguage((state) => state.language)
 
 	// #Добавить реализацию добавления товара в корзину
-	const HandleClickOnAddToCart = ({ currentTarget }) => {
-		quantityOrder
-			? setIsActivated(true)
-			: console.log("123");
+	const HandleClickOnAddToCart = (productInfo) => {
+		if (quantityOrder) {
+			setIsActivated(true)
+			addToCart(productInfo.id, quantityOrder)
+		}
 	};
 
 
@@ -230,7 +233,7 @@ const ProductPage = () => {
 					</Box>
 
 					<Box
-						onClick={HandleClickOnAddToCart}
+						onClick={() => HandleClickOnAddToCart(productInfo)}
 						sx={{
 							cursor: "pointer",
 							background: `${

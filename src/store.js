@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { nanoid } from "nanoid"
 
 const useLanguage = create((set) => ({
 	language: "rus",
@@ -184,4 +185,36 @@ const useWishList = create((set, get) => ({
 	},
 }));
 
-export { useLanguage, useCategories, useWishList };
+const useCart = create((set, get) => ({
+	cartArray: [],
+	addToCart: (productId, quantity) => {
+		const { cartArray } = get()
+		set({
+			cartArray: [...cartArray, {
+				productId: productId,
+				quantity: quantity,
+				id: nanoid(),
+			}]
+		})
+	},
+	changeQuantity: (id, number) => {
+		const { cartArray: prevArray } = get()
+		prevArray.map((item) => {if (item.id == id) {item.quantity = item.quantity + number}})
+		set({
+			cartArray: [...prevArray]
+		})
+	},
+	deleteFromCart: (id) => {
+		const { cartArray } = get()
+		set({
+			cartArray: cartArray.filter((item) => item.productId !== id)
+		})
+	},
+	deleteAll: () => {
+		set({
+			cartArray: []
+		})
+	}
+}))
+
+export { useLanguage, useCategories, useWishList, useCart };

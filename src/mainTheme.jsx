@@ -8,6 +8,9 @@ const mainTheme = createTheme({
 		secondary: {
 			main: "#000000",
 		},
+		warning: {
+			main:"#D9D9D9",
+		},
 		text: {
 			primary: "#1F2024",
 			secondary: "#000000",
