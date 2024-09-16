@@ -1,11 +1,21 @@
 import { create } from "zustand";
-import { nanoid } from "nanoid"
+import { nanoid } from "nanoid";
 
 const useLanguage = create((set) => ({
 	language: "rus",
+	languageArray: [
+		{
+			title: "Русский",
+			value: "rus",
+		},
+		{
+			title: "O'zbekcha",
+			value: "uzb",
+		},
+	],
 	changeLanguage: (newLanguage) =>
-		set((state) => {
-			state.language = newLanguage;
+		set({
+			language: newLanguage,
 		}),
 }));
 
@@ -188,33 +198,68 @@ const useWishList = create((set, get) => ({
 const useCart = create((set, get) => ({
 	cartArray: [],
 	addToCart: (productId, quantity) => {
-		const { cartArray } = get()
+		const { cartArray } = get();
 		set({
-			cartArray: [...cartArray, {
-				productId: productId,
-				quantity: quantity,
-				id: nanoid(),
-			}]
-		})
+			cartArray: [
+				...cartArray,
+				{
+					productId: productId,
+					quantity: quantity,
+					id: nanoid(),
+				},
+			],
+		});
 	},
 	changeQuantity: (id, number) => {
-		const { cartArray: prevArray } = get()
-		prevArray.map((item) => {if (item.id == id) {item.quantity = item.quantity + number}})
+		const { cartArray: prevArray } = get();
+		prevArray.map((item) => {
+			if (item.id == id) {
+				item.quantity = item.quantity + number;
+			}
+		});
 		set({
-			cartArray: [...prevArray]
-		})
+			cartArray: [...prevArray],
+		});
 	},
 	deleteFromCart: (id) => {
-		const { cartArray } = get()
+		const { cartArray } = get();
 		set({
-			cartArray: cartArray.filter((item) => item.productId !== id)
-		})
+			cartArray: cartArray.filter((item) => item.productId !== id),
+		});
 	},
 	deleteAll: () => {
 		set({
-			cartArray: []
-		})
-	}
-}))
+			cartArray: [],
+		});
+	},
+}));
 
-export { useLanguage, useCategories, useWishList, useCart };
+const useAddreses = create((set, get) => ({
+	addressArray: [
+		{
+			id: nanoid(),
+			value: "Строительный магазин, Буйук Ипак Йули, город Самарканд, Самаркадская область, 140000, Узбекистан",
+		},
+	],
+	addNewAddress: (newAddress) => {
+		const { addressArray: prevAddressArray } = get();
+		set({
+			addressArray: [
+				...prevAddressArray,
+				{
+					id: nanoid(),
+					value: newAddress,
+				},
+			],
+		});
+	},
+	deleteAddress: (id) => {
+		const { addressArray: prevAddressArray } = get();
+		prevAddressArray.filter((item) => item.id !== id);
+		set({
+			addressArray: prevAddressArray,
+		});
+	},
+}));
+
+export { useLanguage, useCategories, useWishList, useCart, useAddreses };

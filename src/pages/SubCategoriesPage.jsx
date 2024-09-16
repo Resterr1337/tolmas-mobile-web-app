@@ -26,7 +26,7 @@ const SubCategoriesPage = () => {
 			}}
 		>
 			<SearchInput></SearchInput>
-			
+
 			{/* Вернуться ко всем категориям */}
 			<Box
 				onClick={() => NavigateFunc("/categories")}
@@ -54,7 +54,11 @@ const SubCategoriesPage = () => {
 						<Box
 							onClick={() => {
 								NavigateFunc("/search/");
-								setSearchParams({query:null, c:subcategory , s:item.value})
+								setSearchParams({
+									query: null,
+									c: subcategory,
+									s: item.value,
+								});
 							}}
 							key={index}
 							sx={{
