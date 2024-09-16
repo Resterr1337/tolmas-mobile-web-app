@@ -8,6 +8,7 @@ import {
 	DialogTitle,
 	TextField,
 	Button,
+	IconButton,
 } from "@mui/material";
 import { useState } from "react";
 
@@ -18,7 +19,10 @@ import { useAddreses } from "../store";
 const AddresesPage = () => {
 	const addressArray = useAddreses((state) => state.addressArray);
 	const addNewAddress = useAddreses((state) => state.addNewAddress);
+	const deleteAddress = useAddreses((state) => state.deleteAddress);
 	const [open, setOpen] = useState(false);
+	const [deleteDialogStatus, setDeleteDialogStatus] = useState(false);
+	const [deleteAddressId, setDeleteAddressId] = useState(null);
 	const [newAddress, setNewAddress] = useState("");
 
 	const handleClickOpen = () => {
@@ -27,6 +31,15 @@ const AddresesPage = () => {
 
 	const handleClose = () => {
 		setOpen(false);
+	};
+
+	const handleDeleteButton = () => {
+		setDeleteDialogStatus(true);
+	};
+
+	const handleCloseDialog = () => {
+        setDeleteAddressId(null)
+		setDeleteDialogStatus(false);
 	};
 
 	return (
@@ -42,7 +55,9 @@ const AddresesPage = () => {
 						borderBottom: "solid 1px #8F9098",
 					}}
 				>
-					<PlusSVG />
+					<IconButton>
+						<PlusSVG />
+					</IconButton>
 					<Typography variant="subtitle1">Добавить новый</Typography>
 				</Box>
 				{addressArray.map((item, index) => {
@@ -66,13 +81,21 @@ const AddresesPage = () => {
 							>
 								{item.value}
 							</Typography>
-							<AddressConfigSVG />
+							<IconButton
+								onClick={() => {
+									handleDeleteButton();
+									setDeleteAddressId(item.id);
+								}}
+							>
+								<AddressConfigSVG />
+							</IconButton>
 						</Box>
 					);
 				})}
 			</Box>
+			{/* Диалог добавления адреса */}
 			<Dialog
-                sx={{borderRadius:"15px"}}
+				sx={{ borderRadius: "15px" }}
 				open={open}
 				onClose={handleClose}
 				PaperProps={{
@@ -102,6 +125,28 @@ const AddresesPage = () => {
 				<DialogActions>
 					<Button onClick={handleClose}>Отмена</Button>
 					<Button type="submit">Добавить</Button>
+				</DialogActions>
+			</Dialog>
+
+			<Dialog
+				sx={{ borderRadius: "15px" }}
+				open={deleteDialogStatus}
+				onClose={handleCloseDialog}
+				PaperProps={{
+					component: "form",
+					onSubmit: (event) => {
+						event.preventDefault();
+						deleteAddress(deleteAddressId);
+                        console.log(addressArray)
+						handleCloseDialog();
+					},
+				}}
+			>
+				<DialogTitle variant="h2">Удалить адрес?</DialogTitle>
+				<DialogContent></DialogContent>
+				<DialogActions>
+					<Button onClick={handleCloseDialog}>Отмена</Button>
+					<Button type="submit">Удалить</Button>
 				</DialogActions>
 			</Dialog>
 		</>

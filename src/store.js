@@ -255,9 +255,8 @@ const useAddreses = create((set, get) => ({
 	},
 	deleteAddress: (id) => {
 		const { addressArray: prevAddressArray } = get();
-		prevAddressArray.filter((item) => item.id !== id);
 		set({
-			addressArray: prevAddressArray,
+			addressArray: prevAddressArray.filter((item) => item.id !== id),
 		});
 	},
 }));
