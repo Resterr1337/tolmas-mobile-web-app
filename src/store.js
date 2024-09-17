@@ -261,4 +261,32 @@ const useAddreses = create((set, get) => ({
 	},
 }));
 
-export { useLanguage, useCategories, useWishList, useCart, useAddreses };
+const useUser = create((set, get) => ({
+	userSettings: {
+		userAvatarSrc:"", // str
+		gender: "", // male || female
+		name: "", // str
+		surName: "", // str
+		dateOfBirt: "", // str,
+		eMail: "", // str,
+		region: "", // str,
+		dateOfRegistration: "", // str
+	},
+
+	changeField: (field, value) => {
+		const { userSettings } = get();
+		userSettings[field] = value;
+		set({
+			userSettings: userSettings,
+		});
+	},
+}));
+
+export {
+	useLanguage,
+	useCategories,
+	useWishList,
+	useCart,
+	useAddreses,
+	useUser,
+};
