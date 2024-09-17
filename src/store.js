@@ -224,7 +224,7 @@ const useCart = create((set, get) => ({
 	deleteFromCart: (id) => {
 		const { cartArray } = get();
 		set({
-			cartArray: cartArray.filter((item) => item.productId !== id),
+			cartArray: cartArray.filter((item) => item.id !== id),
 		});
 	},
 	deleteAll: () => {
@@ -263,7 +263,7 @@ const useAddreses = create((set, get) => ({
 
 const useUser = create((set, get) => ({
 	userSettings: {
-		userAvatarSrc:"", // str
+		userAvatarSrc: "", // str
 		gender: "", // male || female
 		name: "", // str
 		surName: "", // str
