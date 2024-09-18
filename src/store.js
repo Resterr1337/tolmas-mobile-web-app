@@ -314,7 +314,7 @@ const useOrders = create((set, get) => ({
 	ordersArray: [
 		{
 			id: nanoid(10),
-			status: "",
+			status: "В ожидании",
 			deliveryWay: "",
 			createOrderTime: "dd/mm/yyyy, hh:mm",
 			deliveryOrderTime: "dd/mm/yyyy, hh:mm",
@@ -330,14 +330,15 @@ const useOrders = create((set, get) => ({
 			],
 		},
 		{
-			id: nanoid(10),
-			status: "",
+			id: 1,
+			status: "Можно забирать",
 			deliveryWay: "",
 			createOrderTime: "dd/mm/yyyy, hh:mm",
 			deliveryOrderTime: "dd/mm/yyyy, hh:mm",
 			deliveryAddress: "Uzbekistan, Samarkandm Buyuk Ipak Yuli",
-			totalCost: 1808800,
-			totalCostWithDiscount: 18920800,
+			isDiscount: true,
+			totalCost: 2000000,
+			totalCostWithDiscount: 1800000,
 			products: [
 				{
 					productId: 0,
@@ -348,41 +349,7 @@ const useOrders = create((set, get) => ({
 		},
 		{
 			id: nanoid(10),
-			status: "",
-			deliveryWay: "",
-			createOrderTime: "dd/mm/yyyy, hh:mm",
-			deliveryOrderTime: "dd/mm/yyyy, hh:mm",
-			deliveryAddress: "Uzbekistan, Samarkandm Buyuk Ipak Yuli",
-			totalCost: 1808800,
-			totalCostWithDiscount: 18920800,
-			products: [
-				{
-					productId: 0,
-					quantity: 1,
-					discount: "15%", // str||bool
-				},
-			],
-		},
-		{
-			id: nanoid(10),
-			status: "",
-			deliveryWay: "",
-			createOrderTime: "dd/mm/yyyy, hh:mm",
-			deliveryOrderTime: "dd/mm/yyyy, hh:mm",
-			deliveryAddress: "Uzbekistan, Samarkandm Buyuk Ipak Yuli",
-			totalCost: 1808800,
-			totalCostWithDiscount: 18920800,
-			products: [
-				{
-					productId: 0,
-					quantity: 1,
-					discount: "15%", // str||bool
-				},
-			],
-		},
-		{
-			id: nanoid(10),
-			status: "",
+			status: "Готов, в пути",
 			deliveryWay: "",
 			createOrderTime: "dd/mm/yyyy, hh:mm",
 			deliveryOrderTime: "dd/mm/yyyy, hh:mm",

@@ -1,5 +1,6 @@
 import { Box, Typography, IconButton } from "@mui/material";
 import { nanoid } from "nanoid";
+import { useNavigate } from "react-router-dom";
 
 import { useLanguage, useOrders } from "@/store.js";
 import { formatPrice } from "../utils/priceFormatter";
@@ -11,12 +12,19 @@ import { useState } from "react";
 const MyOrdersPage = () => {
 	const ordersArray = useOrders((state) => state.ordersArray);
 	const currentLanguage = useLanguage((state) => state.language);
+	const NavigateFunc = useNavigate()
 
 	const [isMoreOpen, setIsMoreOpen] = useState(
 		Object.fromEntries(ordersArray.map((item) => (item = [item.id, false])))
 	);
 
 	const [isHistory, setIsHistory] = useState(false);
+
+	const handleOpenOrderPage = (item, event) => {
+		if (event.target.id !== "functionalObject") {
+			NavigateFunc(`/order/${item.id}`)
+		}
+	}
 
 	return (
 		<>
@@ -83,17 +91,21 @@ const MyOrdersPage = () => {
 			{isHistory ? (
 				<Typography variant="h2">Ваша история заказов пуста</Typography>
 			) : (
-				ordersArray.map((item, array) => {
+				ordersArray.map((item) => {
 					return (
 						<Box
+							onClick={() => {
+								handleOpenOrderPage(item, event)
+							}}
 							sx={{
 								display: "flex",
 								flexDirection: "column",
 								padding: "10px",
 								gap: "10px",
 								background: "#F4F7F9",
-								borderRadius: "5px",
+								borderRadius: "10px",
 								transition: "all 500ms",
+								my:"10px"
 							}}
 							key={nanoid()}
 						>
@@ -115,7 +127,7 @@ const MyOrdersPage = () => {
 								}}
 							>
 								<Typography>Статус</Typography>
-								<Typography>В ожидании</Typography>
+								<Typography>{item.status}</Typography>
 							</Box>
 							<Box
 								sx={{
@@ -166,6 +178,7 @@ const MyOrdersPage = () => {
 								}}
 							>
 								<Box
+									id="functionalObject"
 									onClick={() => {
 										setIsMoreOpen(
 											Object.fromEntries(
@@ -184,10 +197,11 @@ const MyOrdersPage = () => {
 										justifyContent: "space-between",
 									}}
 								>
-									<Typography color="#2588FF" variant="h2">
+									<Typography id="functionalObject" color="#2588FF" variant="h2">
 										{item.products.length} товар
 									</Typography>
 									<IconButton
+										id="functionalObject"
 										sx={{
 											transition: "all 500ms",
 											transform: isMoreOpen[item.id]
@@ -199,7 +213,7 @@ const MyOrdersPage = () => {
 											},
 										}}
 									>
-										<ArrowToDownSVG />
+										<ArrowToDownSVG id="functionalObject" />
 									</IconButton>
 								</Box>
 
