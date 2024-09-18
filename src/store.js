@@ -180,7 +180,7 @@ const useCategories = create((set) => ({
 }));
 
 const useWishList = create((set, get) => ({
-	wishList: [0],
+	wishList: [],
 	addToWishList: (id) => {
 		const { wishList } = get();
 		set({

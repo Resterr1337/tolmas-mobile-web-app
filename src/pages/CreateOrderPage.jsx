@@ -26,7 +26,8 @@ import VisaSVG from "@/assets/CreateOrderPage/visa.svg?react";
 import UzcardSVG from "@/assets/CreateOrderPage/uzcard.svg?react";
 import MastercardSVG from "@/assets/CreateOrderPage/mastercard.svg?react";
 
-
+import { some_products } from "../data";
+import { formatPrice } from "../utils/priceFormatter";
 
 const CreateOrderPage = () => {
 	const currentLanguage = useLanguage((state) => state.language);
@@ -38,6 +39,45 @@ const CreateOrderPage = () => {
 
 	const cartArray = useCart((state) => state.cartArray);
 
+	const isDiscount = Boolean(
+		cartArray.filter((item) => some_products[item.productId].discount)
+			.length
+	);
+
+	const discountItems = cartArray.map((item) => {
+		const discount = some_products[item.productId].discount;
+		if (some_products[item.productId].discount) {
+			return {
+				quantity: item.quantity,
+				discount: discount.includes("%")
+					? some_products[item.productId].price *
+					  parseFloat(
+							`0.${discount.substring(0, discount.indexOf("%"))}`
+					  )
+					: some_products[item.productId].price - parseInt(discount),
+				price: some_products[item.productId].price,
+			};
+		} else {
+			return {
+				quantity: item.quantity,
+				discount: 0,
+				price: some_products[item.productId].price,
+			};
+		}
+	});
+
+	const totalCost = cartArray.reduce(
+		(accumulator, item) =>
+			accumulator + item.quantity * some_products[item.productId].price,
+		0
+	);
+
+	const totalCostWithDiscount = discountItems.reduce(
+		(accamulator, item) =>
+			accamulator + item.quantity * (item.price - item.discount),
+		0
+	);
+
 	const [isAddressModalOpen, setisAddressModalOpen] = useState(false);
 	const [selectedAddress, setSelectedAddress] = useState("");
 	const NavigateFunc = useNavigate();
@@ -48,7 +88,7 @@ const CreateOrderPage = () => {
 	const [isPromoModalOpen, setisPromoModalOpen] = useState(false);
 	const [promo, setPromo] = useState("");
 
-	const [isRegModalOpen, setIsRegModalOpen] = useState(true);
+	const [isRegModalOpen, setIsRegModalOpen] = useState(false);
 
 	const handleCloseAddressModal = () => {
 		setisAddressModalOpen(false);
@@ -295,22 +335,27 @@ const CreateOrderPage = () => {
 					}}
 				>
 					{/* Цена без учёта скидки */}
-					<Typography
-						sx={{ textDecoration: "line-through" }}
-						color="#8F9098"
-						variant="h2"
-					>
-						5 555 000 UZS
-					</Typography>
+					{isDiscount ? (
+						<Typography
+							sx={{ textDecoration: "line-through" }}
+							color="#8F9098"
+							variant="h2"
+						>
+							{formatPrice(totalCost)} UZS
+						</Typography>
+					) : (
+						<></>
+					)}
 					{/* Цена с учётом скидок */}
-					<Typography fontSize={"1.5rem"} variant="h1">
-						5 000 000 UZS
+					<Typography fontSize={isDiscount? "1.5rem": "2.25rem"} variant="h1">
+						{isDiscount? formatPrice(totalCostWithDiscount): formatPrice(totalCost)} UZS
 					</Typography>
 					<Typography variant="subtitle2">Всего</Typography>
 				</Box>
 
 				<Box
 					onClick={() => {
+						
 						setIsRegModalOpen(true);
 					}}
 					sx={{

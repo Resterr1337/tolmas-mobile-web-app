@@ -17,7 +17,7 @@ const some_products = [
 			uzb: "Tasavvur qiling, siz cheksiz kosmosning chekkasida turibsiz, yulduzlar hech qachon bo'lmaganidek yorqin porlaydi va galaktikalar maftunkor raqsda aylanib yuradi. Havo uzoq yulduz tizimlari va sirli tumanliklarning hidi bilan to'yingan. Biz aynan shu og'irsizlik va cheksizlik hissiyotini yangi erkaklar atirlarimizda ifoda etishni xohladik.",
 		},
 		price: 1680000, // int
-		discount: false, // bool || str
+		discount: "15%" , // bool || str
 		quantity: 50, // int
 		quantityWeekSales: 4, // int || bool
 		characteristics: {
@@ -116,7 +116,7 @@ const some_products = [
 			uzb: "Sirli o'rmon. Erkaklar uchun atir, sizni tungi o'rmonning sirli atmosferasi bilan o'rab oladi. Vetiver va kedr daraxtlarining yog'ochli notalari, kardamonning achchiq akkordlari va mardona ambra noyob, unutilmas xushbo'ylikni yaratadi. O'ziga ishongan, uslub va individuallikni qadrlaydigan erkak uchun ideal tanlov.",
 		},
 		price: 100000, // int
-		discount: "15%", // bool || str
+		discount: "10000", // bool || str
 		quantity: 37, // int
 		quantityWeekSales: 56, // int || bool
 		characteristics: {

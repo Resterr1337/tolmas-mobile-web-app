@@ -22,9 +22,44 @@ const MyCartPage = () => {
 
 	const NavigateFunc = useNavigate();
 
+	const isDiscount = Boolean(
+		cartArray.filter((item) => some_products[item.productId].discount)
+			.length
+	);
+
+	const discountItems = cartArray.map((item) => {
+		const discount = some_products[item.productId].discount;
+		if (some_products[item.productId].discount) {
+			return {
+				quantity: item.quantity,
+				discount: discount.includes("%")
+					? some_products[item.productId].price *
+					  parseFloat(
+							`0.${discount.substring(0, discount.indexOf("%"))}`
+					  )
+					: some_products[item.productId].price - parseInt(discount),
+				price: some_products[item.productId].price,
+			};
+		} else {
+			return {
+				quantity: item.quantity,
+				discount: 0,
+				price: some_products[item.productId].price,
+			};
+		}
+	});
+
+	console.log(discountItems)
+
 	const totalCost = cartArray.reduce(
 		(accumulator, item) =>
 			accumulator + item.quantity * some_products[item.productId].price,
+		0
+	);
+
+	const totalCostWithDiscount = discountItems.reduce(
+		(accamulator, item) =>
+			accamulator + item.quantity * (item.price - item.discount),
 		0
 	);
 
@@ -312,8 +347,26 @@ const MyCartPage = () => {
 							justifyContent: "space-between",
 						}}
 					>
-						<Typography variant="h3">
-							{formatPrice(totalCost)} UZS
+						{isDiscount ? (
+							<Typography
+								sx={{ textDecoration: "line-through" }}
+								color="#8F9098"
+								variant="h2"
+							>
+								{formatPrice(totalCost)} UZS
+							</Typography>
+						) : (
+							<></>
+						)}
+						{/* Цена с учётом скидок */}
+						<Typography
+							fontSize={isDiscount ? "1.25rem" : "1.75rem"}
+							variant="h1"
+						>
+							{isDiscount
+								? formatPrice(totalCostWithDiscount)
+								: formatPrice(totalCost)}{" "}
+							UZS
 						</Typography>
 						<Typography variant="subtitle2">Всего</Typography>
 					</Box>
