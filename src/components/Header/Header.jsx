@@ -175,7 +175,7 @@ const Header = () => {
 									}}
 								></Box>
 								<Typography variant="h2">
-									Способ доставки
+									{currentLanguage== "rus"? "Способ доставки" : "Yetkazib berish usuli"}
 								</Typography>
 
 								<Box>
@@ -223,7 +223,7 @@ const Header = () => {
 										textTransform: "none",
 									}}
 								>
-									Выбрать
+									{currentLanguage== "rus"? "Выбрать" : "Tanlang"}
 								</Button>
 							</Box>
 						</>
