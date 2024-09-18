@@ -265,8 +265,8 @@ const useUser = create((set, get) => ({
 	userSettings: {
 		userAvatarSrc: "", // str
 		gender: "", // male || female
-		name: "", // str
-		surName: "", // str
+		name: "Имя", // str
+		surName: "Фамилия", // str
 		dateOfBirth: "", // str,
 		eMail: "", // str,
 		region: "", // str,
@@ -276,7 +276,6 @@ const useUser = create((set, get) => ({
 	changeField: (field, value) => {
 		const { userSettings } = get();
 		userSettings[field] = value;
-		console.log(userSettings);
 		set({
 			userSettings: userSettings,
 		});

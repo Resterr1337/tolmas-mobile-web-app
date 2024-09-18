@@ -17,7 +17,7 @@ const some_products = [
 			uzb: "Tasavvur qiling, siz cheksiz kosmosning chekkasida turibsiz, yulduzlar hech qachon bo'lmaganidek yorqin porlaydi va galaktikalar maftunkor raqsda aylanib yuradi. Havo uzoq yulduz tizimlari va sirli tumanliklarning hidi bilan to'yingan. Biz aynan shu og'irsizlik va cheksizlik hissiyotini yangi erkaklar atirlarimizda ifoda etishni xohladik.",
 		},
 		price: 1680000, // int
-		discount: "15%" , // bool || str
+		discount: "15%", // bool || str
 		quantity: 50, // int
 		quantityWeekSales: 4, // int || bool
 		characteristics: {
@@ -200,7 +200,6 @@ const some_products = [
 	},
 ];
 
-
 const some_promo = [
 	{
 		link: "promo/dark_friday_promo",
@@ -256,24 +255,91 @@ const some_promo = [
 ];
 
 const paymentWays = {
-	cash:{
-		title:{
-			rus:"Оплата наличными или картой при получение",
-			uzb:"Naqd pul yoki karta orqali to'lash"
-		}
+	cash: {
+		title: {
+			rus: "Оплата наличными или картой при получение",
+			uzb: "Naqd pul yoki karta orqali to'lash",
+		},
 	},
-	cards:{
-		title:{
-			rus:"Оплата картой онлайн",
-			uzb:"Karta bilan to'lash"
-		}
+	cards: {
+		title: {
+			rus: "Оплата картой онлайн",
+			uzb: "Karta bilan to'lash",
+		},
 	},
-	uzumBank:{
-		title:{
-			rus:"Через приложение Uzum bank",
-			uzb:"Uzum bank ilovasi orqali"
-		}
-	}
-}
+	uzumBank: {
+		title: {
+			rus: "Через приложение Uzum bank",
+			uzb: "Uzum bank ilovasi orqali",
+		},
+	},
+};
 
-export { some_products,  some_promo , paymentWays};
+const HeaderNamesObj = {
+	"/": {
+		"rus": "Tolmas market",
+		"uzb": "Tolmas market",
+	},
+	"/product": {
+		"rus": "Tolmas market",
+		"uzb": "Tolmas market",
+	},
+	"/categories": {
+		"rus": "Tolmas market",
+		"uzb": "Tolmas market",
+	},
+	"/search": {
+		"rus": "Tolmas market",
+		"uzb": "Tolmas market",
+	},
+	"/subcategory": {
+		"rus": "Tolmas market",
+		"uzb": "Tolmas market",
+	},
+	"/mywishes": {
+		"rus": "Мои желания",
+		"uzb": "Mening istaklarim",
+	},
+	"/myorders": {
+		"rus": "Мои заказы",
+		"uzb": "Mening buyurtmalarim",
+	},
+	"/mycart": {
+		"rus": "Корзина",
+		"uzb": "Savat",
+	},
+	"/userinfo": {
+		"rus": "Аккаунт",
+		"uzb": "Hisob",
+	},
+	"/userinfo/adresses": {
+		"rus": "Мои адреса",
+		"uzb": "Mening manzillarim",
+	},
+	"/userinfo/aboutCompany": {
+		"rus": "О компании",
+		"uzb": "Kompaniya haqida",
+	},
+	"/userinfo/changeLanguage": {
+		"rus": "Смена языка",
+		"uzb": "Tilni o'zgartirish",
+	},
+	"/userinfo/settings": {
+		"rus": "Личный кабинет",
+		"uzb": "Shaxsiy hisob",
+	},
+	"/createOrder": {
+		"rus": "Оформить заказ",
+		"uzb": "Buyurtma bering",
+	},
+	"/createOrder": {
+		"rus": "Оформить заказ",
+		"uzb": "Buyurtma bering",
+	},
+	"/order":{
+		"rus": "Детали заказа",
+		"uzb":"Buyurtma tafsilotlari",
+	},
+};
+
+export { some_products, some_promo, paymentWays, HeaderNamesObj };

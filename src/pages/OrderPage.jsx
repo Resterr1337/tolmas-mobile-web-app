@@ -298,7 +298,7 @@ const OrderPage = () => {
 						</Button>
 					</Box>
 
-					{/* Модалка с QR кодом */}
+					{/* Модалка с Курьером */}
 					<Box
 						sx={{
 							position: "fixed",

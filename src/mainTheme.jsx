@@ -19,7 +19,7 @@ const mainTheme = createTheme({
 	typography: {
 		fontFamily: ["Onest", "sans-serif"].join(","),
 		h1: {
-			fontSize: "1.75rem",
+			fontSize: "1.5rem",
 			fontWeight: 700,
 			lineHeight: "1",
 		},

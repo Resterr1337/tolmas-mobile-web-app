@@ -49,7 +49,6 @@ const MyCartPage = () => {
 		}
 	});
 
-	console.log(discountItems)
 
 	const totalCost = cartArray.reduce(
 		(accumulator, item) =>
