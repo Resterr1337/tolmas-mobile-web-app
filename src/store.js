@@ -282,6 +282,53 @@ const useUser = create((set, get) => ({
 	},
 }));
 
+const useDeliveryWay = create((set, get) => ({
+	deliveryWayArray: [
+		{
+			title: {
+				rus: "Самовывоз",
+				uzb: "Olib ketish",
+			},
+			value: "pickup",
+		},
+		{
+			title: {
+				rus: "Доставка",
+				uzb: "Yetkazib berish",
+			},
+			value: "delivery",
+		},
+	],
+	activeDeliveryWay: "delivery",
+	changeActiveDeliveryWay: (newValue) => {
+		const { deliveryWayArray} = get();
+		set({
+			deliveryWayArray: deliveryWayArray,
+			activeDeliveryWay: newValue,
+		});
+	},
+}));
+
+const useOrders = create((set, get) => ({
+	ordersArray: [
+		{
+			id: nanoid(),
+			status: "",
+			createOrderTime: "dd/mm/yyyy, hh:mm",
+			deliveryOrderTime: "dd/mm/yyyy, hh:mm",
+			deliveryAddress: "Uzbekistan, Samarkandm Buyuk Ipak Yuli",
+			cost: 1880800,
+			products: [
+				{
+					productId: 0,
+					quantity: 1,
+					discount: "15%", // str||bool
+				},
+			],
+		},
+	],
+}));
+
 export {
 	useLanguage,
 	useCategories,
@@ -289,4 +336,5 @@ export {
 	useCart,
 	useAddreses,
 	useUser,
+	useDeliveryWay
 };

@@ -1,12 +1,6 @@
-import {
-	Box,
-	Checkbox,
-	Typography,
-	Button,
-	FormControlLabel,
-	ButtonGroup,
-} from "@mui/material";
+import { Box, Checkbox, Typography, Button } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import DeleteSVG from "@/assets/Cart/delete.svg?react";
 import IncrementSVG from "@/assets/Cart/next.svg?react";
@@ -26,6 +20,8 @@ const MyCartPage = () => {
 
 	const [deleteIdArray, setDeleteIdArray] = useState([]);
 
+	const NavigateFunc = useNavigate();
+
 	const totalCost = cartArray.reduce(
 		(accumulator, item) =>
 			accumulator + item.quantity * some_products[item.productId].price,
@@ -34,10 +30,9 @@ const MyCartPage = () => {
 
 	const handleSoloCheckboxClick = (event) => {
 		if (deleteIdArray.includes(event.target.name)) {
-			setDeleteIdArray(
-				[...deleteIdArray.filter((id) => id !== event.target.name)]
-			);
-
+			setDeleteIdArray([
+				...deleteIdArray.filter((id) => id !== event.target.name),
+			]);
 		} else {
 			setDeleteIdArray([...deleteIdArray, event.target.name]);
 		}
@@ -45,11 +40,15 @@ const MyCartPage = () => {
 
 	const handleAllCheckboxClick = () => {
 		if (deleteIdArray.length == cartArray.length) {
-			setDeleteIdArray([])
+			setDeleteIdArray([]);
 		} else {
-			setDeleteIdArray([...cartArray.map((item) => {return item.id})])
+			setDeleteIdArray([
+				...cartArray.map((item) => {
+					return item.id;
+				}),
+			]);
 		}
-	}
+	};
 
 	return (
 		<>
@@ -72,8 +71,14 @@ const MyCartPage = () => {
 					}}
 				>
 					<Checkbox
-						checked={deleteIdArray.length == cartArray.length? true: false}
-						onClick={() => {handleAllCheckboxClick()}}
+						checked={
+							deleteIdArray.length == cartArray.length
+								? true
+								: false
+						}
+						onClick={() => {
+							handleAllCheckboxClick();
+						}}
 						sx={{
 							color: "#D9D9D9",
 							"&.Mui-checked": {
@@ -90,11 +95,10 @@ const MyCartPage = () => {
 						textTransform: "capitalize",
 					}}
 					onClick={() => {
-						if (deleteIdArray.length == cartArray.length){
-							deleteAll()
+						if (deleteIdArray.length == cartArray.length) {
+							deleteAll();
 						}
 					}}
-
 					startIcon={<DeleteSVG />}
 					size={"small"}
 					variant="outlined"
@@ -134,7 +138,11 @@ const MyCartPage = () => {
 							>
 								{/* Добавление в массив на удаление */}
 								<Checkbox
-									checked={deleteIdArray.includes(item.id)? true : false}
+									checked={
+										deleteIdArray.includes(item.id)
+											? true
+											: false
+									}
 									name={item.id}
 									onClick={(event) =>
 										handleSoloCheckboxClick(event, item)
@@ -310,6 +318,9 @@ const MyCartPage = () => {
 						<Typography variant="subtitle2">Всего</Typography>
 					</Box>
 					<Box
+						onClick={() => {
+							NavigateFunc("/createOrder");
+						}}
 						sx={{
 							background: "#677697",
 							borderRadius: "5px",

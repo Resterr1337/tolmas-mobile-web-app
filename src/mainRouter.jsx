@@ -15,6 +15,7 @@ import { AddresesPage } from "./pages/AddressesPage.jsx";
 import { ChangeLanguagePage } from "./pages/ChangeLanguagePage.jsx";
 import { AboutCompanyPage } from "./pages/AboutCompanyPage.jsx";
 import { UserSettingsPage } from "./pages/UserSettingsPage.jsx";
+import { CreateOrderPage } from "./pages/CreateOrderPage.jsx";
 
 // Доделать роутинг
 const router = createBrowserRouter([
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
 				path:"userinfo/settings",
 				element: <UserSettingsPage/>
 			},
+			{
+				path:"createOrder",
+				element:<CreateOrderPage/>
+			}
 		],
 	},
 ]);

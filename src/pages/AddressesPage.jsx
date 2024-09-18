@@ -38,7 +38,7 @@ const AddresesPage = () => {
 	};
 
 	const handleCloseDialog = () => {
-        setDeleteAddressId(null)
+		setDeleteAddressId(null);
 		setDeleteDialogStatus(false);
 	};
 
@@ -74,13 +74,14 @@ const AddresesPage = () => {
 								padding: "10px",
 							}}
 						>
-							<Typography
-								sx={{ width: "70%" }}
-								lineHeight={1.125}
-								variant="subtitle2"
-							>
-								{item.value}
-							</Typography>
+							<Box sx={{ width: "70%" }}>
+								<Typography
+									lineHeight={1.125}
+									variant="subtitle2"
+								>
+									{item.value}
+								</Typography>
+							</Box>
 							<IconButton
 								onClick={() => {
 									handleDeleteButton();
@@ -114,6 +115,8 @@ const AddresesPage = () => {
 					</DialogContentText>
 					<TextField
 						onInput={() => setNewAddress(event.target.value)}
+						autoCorrect="false"
+						autoComplete="false"
 						required
 						margin="dense"
 						id="name"
@@ -137,7 +140,6 @@ const AddresesPage = () => {
 					onSubmit: (event) => {
 						event.preventDefault();
 						deleteAddress(deleteAddressId);
-                        console.log(addressArray)
 						handleCloseDialog();
 					},
 				}}
