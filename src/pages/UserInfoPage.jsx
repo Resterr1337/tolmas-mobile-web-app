@@ -8,9 +8,11 @@ import AboutCompanySVG from "@/assets/MyUserInfoPage/aboutCompany.svg?react";
 import ChangeLanguageSVG from "@/assets/MyUserInfoPage/changeLanguage.svg?react";
 import QuitSVG from "@/assets/MyUserInfoPage/quit.svg?react";
 import FeedBackSVG from "@/assets/MyUserInfoPage/feedBack.svg?react";
+import { useUser } from "../store";
 
 const UserInfoPage = () => {
 	const NavigateFunc = useNavigate();
+	const userSettings = useUser((state) => state.userSettings)
 
 	return (
 		<Box sx={{ display: "flex", flexDirection: "column", gap: "5px" }}>
@@ -44,7 +46,7 @@ const UserInfoPage = () => {
 							gap: "5px",
 						}}
 					>
-						<Typography variant="h2">Имя Фамилия</Typography>
+						<Typography variant="h2">{userSettings.name} {userSettings.surName}</Typography>
 						<Typography variant="subtitle1">
 							+998 33 999 99 99
 						</Typography>

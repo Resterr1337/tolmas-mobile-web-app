@@ -1,10 +1,18 @@
 import { Box, Typography, Input, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useUser } from "../store";
+import { useState } from "react";
+import dayjs from "dayjs";
 
 const UserSettingsPage = () => {
 	const userSettings = useUser((state) => state.userSettings);
 	const changeField = useUser((state) => state.changeField);
+	const [gender, setGender] = useState(userSettings.gender);
+	const [email, setEmail] = useState(userSettings.eMail);
+	const [region, setRegion] = useState(userSettings.region);
+	const [name, setName] = useState(userSettings.name);
+	const [surName, setSurName] = useState(userSettings.surName);
+	const [dateOfBirth, setDateOfBirth] = useState(userSettings.dateOfBirth || '');
 
 	return (
 		<Box
@@ -26,8 +34,7 @@ const UserSettingsPage = () => {
 					my: "20px",
 					borderRadius: "100%",
 					background: "gray",
-					backgroundPosition: "50%",
-					backgroundPosition: "50%",
+					backgroundPosition: "50% 50%",
 					backgroundRepeat: "no-repeat",
 					bavckgroundSize: "cover",
 				}}
@@ -57,13 +64,18 @@ const UserSettingsPage = () => {
 					}}
 				>
 					<Typography
+						onClick={() => {
+							changeField("gender", "male");
+							setGender("male");
+						}}
 						sx={{
 							cursor: "pointer",
 							padding: "8px 0px",
 							width: "45%",
 							textAlign: "center",
-							background: "white",
+							background: gender == "male" ? "white" : "none",
 							borderRadius: "16px",
+							transition: "all 300ms",
 						}}
 						variant="h3"
 					>
@@ -71,13 +83,18 @@ const UserSettingsPage = () => {
 					</Typography>
 					<Typography variant="h3">|</Typography>
 					<Typography
+						onClick={() => {
+							changeField("gender", "female");
+							setGender("female");
+						}}
 						sx={{
 							cursor: "pointer",
 							padding: "8px 0px",
 							width: "45%",
 							textAlign: "center",
-							background: "none",
+							background: gender == "female" ? "white" : "none",
 							borderRadius: "16px",
+							transition: "all 300ms",
 						}}
 						variant="h3"
 					>
@@ -108,7 +125,15 @@ const UserSettingsPage = () => {
 					}}
 				>
 					<Typography variant="h2">Имя</Typography>
-					<TextField placeholder="Имя" variant="outlined"></TextField>
+					<TextField
+						onInput={() => {
+							setName(event.target.value);
+							changeField("name", event.target.value);
+						}}
+						value={name}
+						placeholder="Имя"
+						variant="outlined"
+					></TextField>
 				</Box>
 				<Box
 					sx={{
@@ -120,6 +145,11 @@ const UserSettingsPage = () => {
 				>
 					<Typography variant="h2">Фамилия</Typography>
 					<TextField
+						onInput={() => {
+							setSurName(event.target.value);
+							changeField("surName", event.target.value);
+						}}
+						value={surName}
 						placeholder="Фамилия"
 						variant="outlined"
 					></TextField>
@@ -141,7 +171,20 @@ const UserSettingsPage = () => {
 				}}
 			>
 				<Typography variant="h2">Дата рожденья</Typography>
-				<DatePicker sx={{width:"100%"}} placeholder="Дата рожденья" />
+				<DatePicker
+					disableFuture
+					onChange={() => {
+						setDateOfBirth(dayjs(event.target.value).format("DD/MM/YYYY"))
+						changeField(
+							"dateOfBirth",
+							dayjs(event.target.value).format("DD/MM/YYYY")
+						);
+					}}
+					defaultValue={ dayjs(dateOfBirth, "MM/DD/YYYY")}
+
+					sx={{ width: "100%" }}
+					placeholder="Дата рожденья"
+				/>
 			</Box>
 
 			{/* Email */}
@@ -160,6 +203,11 @@ const UserSettingsPage = () => {
 			>
 				<Typography variant="h2">E-mail</Typography>
 				<TextField
+					onInput={() => {
+						changeField("eMail", event.target.value);
+						setEmail(event.target.value);
+					}}
+					value={email}
 					fullWidth
 					variant="outlined"
 					type="mail"
@@ -184,6 +232,11 @@ const UserSettingsPage = () => {
 				<Typography variant="h2">Регион</Typography>
 				<TextField
 					fullWidth
+					onInput={() => {
+						setRegion(event.target.value);
+						changeField("region", event.target.value);
+					}}
+					value={region}
 					variant="outlined"
 					placeholder="Регион"
 				></TextField>
@@ -208,7 +261,7 @@ const UserSettingsPage = () => {
 					fullWidth
 					readonly
 					variant="outlined"
-					value={"29.01.2024"}
+					value={userSettings.dateOfRegistration}
 				></TextField>
 			</Box>
 		</Box>

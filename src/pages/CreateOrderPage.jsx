@@ -26,8 +26,9 @@ import VisaSVG from "@/assets/CreateOrderPage/visa.svg?react";
 import UzcardSVG from "@/assets/CreateOrderPage/uzcard.svg?react";
 import MastercardSVG from "@/assets/CreateOrderPage/mastercard.svg?react";
 
-import { some_products } from "../data";
+import { some_products, paymentWays } from "../data";
 import { formatPrice } from "../utils/priceFormatter";
+import { dayCalendarClasses } from "@mui/x-date-pickers";
 
 const CreateOrderPage = () => {
 	const currentLanguage = useLanguage((state) => state.language);
@@ -38,6 +39,7 @@ const CreateOrderPage = () => {
 	);
 
 	const cartArray = useCart((state) => state.cartArray);
+	const createOrder = useCart((state) => state.createOrder);
 
 	const isDiscount = Boolean(
 		cartArray.filter((item) => some_products[item.productId].discount)
@@ -103,6 +105,13 @@ const CreateOrderPage = () => {
 	const handleCloseRegModal = () => {
 		setIsRegModalOpen(false);
 	};
+
+	const handleCreateOrder = () => {
+		if (currentDeliveryWay == "delivery"){
+			if (selectedAddress && paymentWay) {
+			}
+		}
+	}
 
 	return (
 		<>
@@ -239,6 +248,7 @@ const CreateOrderPage = () => {
 				>
 					<Typography variant="h2">Выберите способ оплаты</Typography>
 					<Box
+						onClick={() => setisPaymentModalOpen(true)}
 						sx={{
 							padding: "12px",
 							display: "flex",
@@ -247,7 +257,6 @@ const CreateOrderPage = () => {
 						}}
 					>
 						<Box
-							onClick={() => setisPaymentModalOpen(true)}
 							sx={{
 								display: "flex",
 								gap: "10px",
@@ -256,7 +265,11 @@ const CreateOrderPage = () => {
 						>
 							<PaymentWayChooseSVG />
 							<Typography variant="subtitle1">
-								Выберите способ оплаты
+								{paymentWay
+									? paymentWays[paymentWay].title[
+											currentLanguage
+									  ]
+									: "Выберите способ оплаты"}
 							</Typography>
 						</Box>
 						<ArrowToRightSVG />
@@ -347,17 +360,20 @@ const CreateOrderPage = () => {
 						<></>
 					)}
 					{/* Цена с учётом скидок */}
-					<Typography fontSize={isDiscount? "1.5rem": "2.25rem"} variant="h1">
-						{isDiscount? formatPrice(totalCostWithDiscount): formatPrice(totalCost)} UZS
+					<Typography
+						fontSize={isDiscount ? "1.5rem" : "2.25rem"}
+						variant="h1"
+					>
+						{isDiscount
+							? formatPrice(totalCostWithDiscount)
+							: formatPrice(totalCost)}{" "}
+						UZS
 					</Typography>
 					<Typography variant="subtitle2">Всего</Typography>
 				</Box>
 
 				<Box
-					onClick={() => {
-						
-						setIsRegModalOpen(true);
-					}}
+					onClick={handleCreateOrder}
 					sx={{
 						display: "flex",
 						alignItems: "center",
@@ -573,8 +589,7 @@ const CreateOrderPage = () => {
 						/>
 						<Box>
 							<Typography variant="h3">
-								Оплата в филиалах или курьеру при получении
-								заказа
+								Оплата картой Онлайн
 							</Typography>
 							<Typography
 								my={"3px"}
@@ -641,7 +656,6 @@ const CreateOrderPage = () => {
 						<Checkbox
 							checked={paymentWay == "uzumBank" ? true : false}
 							onClick={() => {
-								console.log("sad");
 								handleClosePaymentModal();
 								setPaymentWay("uzumBank");
 							}}

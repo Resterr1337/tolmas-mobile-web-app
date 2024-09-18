@@ -255,4 +255,25 @@ const some_promo = [
 	},
 ];
 
-export { some_products,  some_promo };
+const paymentWays = {
+	cash:{
+		title:{
+			rus:"Оплата наличными или картой при получение",
+			uzb:"Naqd pul yoki karta orqali to'lash"
+		}
+	},
+	cards:{
+		title:{
+			rus:"Оплата картой онлайн",
+			uzb:"Karta bilan to'lash"
+		}
+	},
+	uzumBank:{
+		title:{
+			rus:"Через приложение Uzum bank",
+			uzb:"Uzum bank ilovasi orqali"
+		}
+	}
+}
+
+export { some_products,  some_promo , paymentWays};

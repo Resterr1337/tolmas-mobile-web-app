@@ -267,15 +267,16 @@ const useUser = create((set, get) => ({
 		gender: "", // male || female
 		name: "", // str
 		surName: "", // str
-		dateOfBirt: "", // str,
+		dateOfBirth: "", // str,
 		eMail: "", // str,
 		region: "", // str,
-		dateOfRegistration: "", // str
+		dateOfRegistration: "29.01.2024", // str
 	},
 
 	changeField: (field, value) => {
 		const { userSettings } = get();
 		userSettings[field] = value;
+		console.log(userSettings);
 		set({
 			userSettings: userSettings,
 		});
@@ -301,7 +302,7 @@ const useDeliveryWay = create((set, get) => ({
 	],
 	activeDeliveryWay: "delivery",
 	changeActiveDeliveryWay: (newValue) => {
-		const { deliveryWayArray} = get();
+		const { deliveryWayArray } = get();
 		set({
 			deliveryWayArray: deliveryWayArray,
 			activeDeliveryWay: newValue,
@@ -312,12 +313,82 @@ const useDeliveryWay = create((set, get) => ({
 const useOrders = create((set, get) => ({
 	ordersArray: [
 		{
-			id: nanoid(),
+			id: nanoid(10),
 			status: "",
+			deliveryWay: "",
 			createOrderTime: "dd/mm/yyyy, hh:mm",
 			deliveryOrderTime: "dd/mm/yyyy, hh:mm",
 			deliveryAddress: "Uzbekistan, Samarkandm Buyuk Ipak Yuli",
-			cost: 1880800,
+			totalCost: 1808800,
+			totalCostWithDiscount: 18920800,
+			products: [
+				{
+					productId: 0,
+					quantity: 1,
+					discount: "15%", // str||bool
+				},
+			],
+		},
+		{
+			id: nanoid(10),
+			status: "",
+			deliveryWay: "",
+			createOrderTime: "dd/mm/yyyy, hh:mm",
+			deliveryOrderTime: "dd/mm/yyyy, hh:mm",
+			deliveryAddress: "Uzbekistan, Samarkandm Buyuk Ipak Yuli",
+			totalCost: 1808800,
+			totalCostWithDiscount: 18920800,
+			products: [
+				{
+					productId: 0,
+					quantity: 1,
+					discount: "15%", // str||bool
+				},
+			],
+		},
+		{
+			id: nanoid(10),
+			status: "",
+			deliveryWay: "",
+			createOrderTime: "dd/mm/yyyy, hh:mm",
+			deliveryOrderTime: "dd/mm/yyyy, hh:mm",
+			deliveryAddress: "Uzbekistan, Samarkandm Buyuk Ipak Yuli",
+			totalCost: 1808800,
+			totalCostWithDiscount: 18920800,
+			products: [
+				{
+					productId: 0,
+					quantity: 1,
+					discount: "15%", // str||bool
+				},
+			],
+		},
+		{
+			id: nanoid(10),
+			status: "",
+			deliveryWay: "",
+			createOrderTime: "dd/mm/yyyy, hh:mm",
+			deliveryOrderTime: "dd/mm/yyyy, hh:mm",
+			deliveryAddress: "Uzbekistan, Samarkandm Buyuk Ipak Yuli",
+			totalCost: 1808800,
+			totalCostWithDiscount: 18920800,
+			products: [
+				{
+					productId: 0,
+					quantity: 1,
+					discount: "15%", // str||bool
+				},
+			],
+		},
+		{
+			id: nanoid(10),
+			status: "",
+			deliveryWay: "",
+			createOrderTime: "dd/mm/yyyy, hh:mm",
+			deliveryOrderTime: "dd/mm/yyyy, hh:mm",
+			deliveryAddress: "Uzbekistan, Samarkandm Buyuk Ipak Yuli",
+			totalCost: 1808800,
+			totalCostWithDiscount: 18920800,
 			products: [
 				{
 					productId: 0,
@@ -327,6 +398,13 @@ const useOrders = create((set, get) => ({
 			],
 		},
 	],
+
+	createOrder: (newOrder) => {
+		const { ordersArray } = get();
+		set({
+			ordersArray: [...ordersArray, newOrder],
+		});
+	},
 }));
 
 export {
@@ -336,5 +414,6 @@ export {
 	useCart,
 	useAddreses,
 	useUser,
-	useDeliveryWay
+	useDeliveryWay,
+	useOrders,
 };
