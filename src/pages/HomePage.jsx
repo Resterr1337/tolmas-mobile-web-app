@@ -1,36 +1,37 @@
 import { Link, useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
-import { Typography, Box , Input} from "@mui/material";
+import { Typography, Box, Input } from "@mui/material";
 import { PromoSlider } from "@/components/HomePage/PromoSlider.jsx";
-import SearchSVG from "@/assets/SearchInput/search.svg?react"
+import SearchSVG from "@/assets/SearchInput/search.svg?react";
 import { CategoriesSlider } from "@/components/HomePage/CategoriesSlider.jsx";
 import { Product } from "@/components/Product/Product.jsx";
 import { some_products, some_promo } from "../data";
-import { useCategories } from "../store";
+import { useCategories, useLanguage } from "../store";
 
 const HomePage = () => {
+	const currentLanguage = useLanguage((state) => state.language);
 	const categories = useCategories((state) => state.categories);
 	const NavigationFunc = useNavigate();
 
 	return (
 		<>
 			{/* Промо-слайдер */}
-			<PromoSlider  promoArray={some_promo}></PromoSlider>
+			<PromoSlider promoArray={some_promo}></PromoSlider>
 
 			{/* Поисковой блок*/}
 			<Box
 				onClick={() => NavigationFunc("/categories")}
 				sx={{ mb: "0.75rem" }}
 			>
-							<Box
-				sx={{
-					display: "flex",
-					alignItems: "center",
-					justifyContent: "start",
-					border: "solid black #",
-				}}
-			>
-				<SearchSVG></SearchSVG>
+				<Box
+					sx={{
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "start",
+						border: "solid black #",
+					}}
+				>
+					<SearchSVG></SearchSVG>
 					<Input
 						sx={{
 							ml: "1rem",
@@ -50,7 +51,11 @@ const HomePage = () => {
 							},
 						}}
 						fullWidth={true}
-						placeholder="Поиск товаров"
+						placeholder={
+							currentLanguage == "rus"
+								? "Поиск товаров"
+								: "Tovarlarni qidirish"
+						}
 					></Input>
 				</Box>
 			</Box>
@@ -58,7 +63,7 @@ const HomePage = () => {
 			{/* Блок с слайдером-категорий */}
 			<Box key={nanoid()}>
 				<Typography key={nanoid()} sx={{ mb: "10px" }} variant="h1">
-					Категории
+					{currentLanguage == "rus" ? "Категории" : "Kategoriyalar"}
 				</Typography>
 				<CategoriesSlider
 					key={nanoid()}
@@ -78,7 +83,9 @@ const HomePage = () => {
 					}}
 				>
 					<Typography key={nanoid()} variant="h1">
-						Парфюмерия
+						{currentLanguage == "rus"
+							? "Парфюмерия"
+							: "Parfyumeriya"}
 					</Typography>
 					<Link key={nanoid()} to={"products"}>
 						<Typography
@@ -90,7 +97,9 @@ const HomePage = () => {
 							fontWeight={400}
 							variant="h3"
 						>
-							Показать всё
+							{currentLanguage == "rus"
+								? "Показать всё"
+								: "Hammasini ko'rsatish"}
 						</Typography>
 					</Link>
 				</Box>

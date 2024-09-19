@@ -9,7 +9,13 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-import { useAddreses, useCart, useDeliveryWay, useLanguage } from "../store";
+import {
+	useAddreses,
+	useCart,
+	useDeliveryWay,
+	useLanguage,
+	useOrders,
+} from "../store";
 
 import AdditionalNumberSVG from "@/assets/CreateOrderPage/additionalPhoneNumber.svg?react";
 import PaymentWayChooseSVG from "@/assets/CreateOrderPage/paymentWayChoose.svg?react";
@@ -28,7 +34,8 @@ import MastercardSVG from "@/assets/CreateOrderPage/mastercard.svg?react";
 
 import { some_products, paymentWays } from "../data";
 import { formatPrice } from "../utils/priceFormatter";
-import { dayCalendarClasses } from "@mui/x-date-pickers";
+import { nanoid } from "nanoid";
+import dayjs from "dayjs";
 
 const CreateOrderPage = () => {
 	const currentLanguage = useLanguage((state) => state.language);
@@ -39,7 +46,7 @@ const CreateOrderPage = () => {
 	);
 
 	const cartArray = useCart((state) => state.cartArray);
-	const createOrder = useCart((state) => state.createOrder);
+	const deleteCartArray = useCart((state) => state.deleteAll);
 
 	const isDiscount = Boolean(
 		cartArray.filter((item) => some_products[item.productId].discount)
@@ -106,12 +113,36 @@ const CreateOrderPage = () => {
 		setIsRegModalOpen(false);
 	};
 
+	const createOrder = useOrders((state) => state.createOrder);
+
 	const handleCreateOrder = () => {
-		if (currentDeliveryWay == "delivery"){
+		if (currentDeliveryWay == "delivery") {
 			if (selectedAddress && paymentWay) {
+				createOrder({
+					id: nanoid(10),
+					status: "В ожидании",
+					deliveryWay: currentDeliveryWay,
+					createOrderTime: dayjs(Date.now()).format(
+						"DD/MM/YYYY hh:mm"
+					),
+					deliveryOrderTime: "dd/mm/yyyy, hh:mm",
+					deliveryAddress: addressArray.find(
+						(item) => item.id == selectedAddress
+					).value,
+					isDiscount: isDiscount,
+					totalCost: totalCost,
+					totalCostWithDiscount: totalCostWithDiscount,
+					products: cartArray,
+				});
+
+				setIsRegModalOpen(true);
+				setTimeout(() => {
+					NavigateFunc(-1, { replace: true });
+					deleteCartArray();
+				}, 5000);
 			}
 		}
-	}
+	};
 
 	return (
 		<>
@@ -125,7 +156,9 @@ const CreateOrderPage = () => {
 					}}
 				>
 					<Typography variant="h2">
-						Дополнительный номер телефона
+						{currentLanguage == "rus"
+							? "Дополнительный номер телефона"
+							: "Qo'shimcha telefon raqami"}
 					</Typography>
 					<Box
 						sx={{
@@ -151,7 +184,11 @@ const CreateOrderPage = () => {
 								},
 							}}
 							variant="standard"
-							placeholder="Номер телелефона"
+							placeholder={
+								currentLanguage == "rus"
+									? "Номер телелефона"
+									: "Telefon raqami"
+							}
 						></Input>
 						<AdditionalNumberSVG />
 					</Box>
@@ -165,10 +202,13 @@ const CreateOrderPage = () => {
 							gap: "10px",
 						}}
 					>
-						<Typography variant="h2">Адрес доставки</Typography>
+						<Typography variant="h2">
+							{currentLanguage == "rus"
+								? "Адрес доставки"
+								: "Yetkazib berish manzili"}
+						</Typography>
 						<Box
 							onClick={() => {
-								console.log("123");
 								setisAddressModalOpen(true);
 							}}
 							sx={{
@@ -191,7 +231,9 @@ const CreateOrderPage = () => {
 													item.id == selectedAddress
 											).value
 									  }`
-									: "Выберите адрес"}
+									: currentLanguage == "rus"
+									? "Выберите адрес"
+									: "Manzilni tanlang"}
 							</Typography>
 							<ArrowToDownSVG />
 						</Box>
@@ -205,7 +247,9 @@ const CreateOrderPage = () => {
 						}}
 					>
 						<Typography variant="h2">
-							Выберите время самовывоза
+							{currentLanguage == "rus"
+								? "Выберите время самовывоза"
+								: "Qabul qilish vaqtini tanlang"}
 						</Typography>
 						<Box
 							sx={{
@@ -217,7 +261,9 @@ const CreateOrderPage = () => {
 							}}
 						>
 							<Typography variant="subtitle1">
-								Выберите время
+								{currentLanguage == "rus"
+									? "Выберите время"
+									: "Vaqtni tanlang"}
 							</Typography>
 							<TimeChooseSVG />
 						</Box>
@@ -231,7 +277,9 @@ const CreateOrderPage = () => {
 							}}
 						>
 							<Typography variant="subtitle1">
-								На след. день
+								{currentLanguage == "rus"
+									? "На следующий день"
+									: "Ertasi kuni"}
 							</Typography>
 							<DateChooseSVG />
 						</Box>
@@ -246,7 +294,11 @@ const CreateOrderPage = () => {
 						gap: "14px",
 					}}
 				>
-					<Typography variant="h2">Выберите способ оплаты</Typography>
+					<Typography variant="h2">
+						{currentLanguage == "rus"
+							? "Выберите способ оплаты"
+							: "To'lov usulini tanlang"}
+					</Typography>
 					<Box
 						onClick={() => setisPaymentModalOpen(true)}
 						sx={{
@@ -269,7 +321,9 @@ const CreateOrderPage = () => {
 									? paymentWays[paymentWay].title[
 											currentLanguage
 									  ]
-									: "Выберите способ оплаты"}
+									: currentLanguage == "rus"
+									? "Выберите способ оплаты"
+									: "To'lov usulini tanlang"}
 							</Typography>
 						</Box>
 						<ArrowToRightSVG />
@@ -292,7 +346,9 @@ const CreateOrderPage = () => {
 						>
 							<PromoCodeSVG />
 							<Typography variant="subtitle1">
-								Есть промокод?
+								{currentLanguage == "rus"
+									? "Есть промокод?"
+									: "Promo-kod bormi?"}
 							</Typography>
 						</Box>
 						<ArrowToRightSVG />
@@ -301,7 +357,9 @@ const CreateOrderPage = () => {
 
 				{/* Комментарий */}
 				<Box>
-					<Typography variant="h2">Комментарий</Typography>
+					<Typography variant="h2">
+						{currentLanguage == "rus" ? "Комментарий" : "Sharh"}
+					</Typography>
 					<Input
 						sx={{
 							padding: "10px 5px",
@@ -318,7 +376,11 @@ const CreateOrderPage = () => {
 						fullWidth
 						minRows={4}
 						maxRows={6}
-						placeholder="Оставьте комментарии"
+						placeholder={
+							currentLanguage == "rus"
+								? "Оставьте комментарии"
+								: "Izoh qoldiring"
+						}
 						multiline
 					></Input>
 				</Box>
@@ -369,7 +431,9 @@ const CreateOrderPage = () => {
 							: formatPrice(totalCost)}{" "}
 						UZS
 					</Typography>
-					<Typography variant="subtitle2">Всего</Typography>
+					<Typography variant="subtitle2">
+						{currentLanguage == "rus" ? "Всего" : "Jami"}
+					</Typography>
 				</Box>
 
 				<Box
@@ -383,7 +447,11 @@ const CreateOrderPage = () => {
 						borderRadius: "5px",
 					}}
 				>
-					<Typography color="white">Оформить</Typography>
+					<Typography color="white">
+						{currentLanguage == "rus"
+							? "Оформить"
+							: "Tartibga solish"}
+					</Typography>
 				</Box>
 			</Box>
 
@@ -422,7 +490,11 @@ const CreateOrderPage = () => {
 						borderRadius: "20px",
 					}}
 				></Box>
-				<Typography variant="h2"> Мои Адреса</Typography>
+				<Typography variant="h2">
+					{currentLanguage == "rus"
+						? "Мои Адреса"
+						: "Mening Manzillarim"}
+				</Typography>
 
 				<Box sx={{ overflowX: "auto", width: "100%" }}>
 					{addressArray.map((item, index) => {
@@ -481,7 +553,11 @@ const CreateOrderPage = () => {
 					<IconButton>
 						<PlusSVG />
 					</IconButton>
-					<Typography variant="subtitle1">Добавить новый</Typography>
+					<Typography variant="subtitle1">
+						{currentLanguage == "rus"
+							? "Добавить новый"
+							: "Yangisini qo'shing"}
+					</Typography>
 				</Box>
 			</Box>
 
@@ -521,7 +597,11 @@ const CreateOrderPage = () => {
 					}}
 				></Box>
 
-				<Typography variant="h2">Способ оплаты</Typography>
+				<Typography variant="h2">
+					{currentLanguage == "rus"
+						? "Способ оплаты"
+						: "To'lov usuli"}
+				</Typography>
 				<Box
 					sx={{
 						display: "flex",
@@ -556,11 +636,14 @@ const CreateOrderPage = () => {
 						/>
 						<Box>
 							<Typography variant="h3">
-								Наличными или картой
+								{currentLanguage == "rus"
+									? "Наличными или картой"
+									: "Naqd pul yoki karta"}
 							</Typography>
 							<Typography lineHeight={1} variant="subtitle1">
-								Оплата в филиалах или курьеру при получении
-								заказа
+								{currentLanguage == "rus"
+									? "Оплата в филиалах или курьеру при получении заказа"
+									: "Buyurtmani olgandan keyin filiallarda yoki kuryerda to'lov"}
 							</Typography>
 						</Box>
 					</Box>
@@ -589,7 +672,9 @@ const CreateOrderPage = () => {
 						/>
 						<Box>
 							<Typography variant="h3">
-								Оплата картой Онлайн
+								{currentLanguage == "rus"
+									? "Оплата картой Онлайн"
+									: "Onlayn karta orqali to'lov"}
 							</Typography>
 							<Typography
 								my={"3px"}
@@ -670,8 +755,9 @@ const CreateOrderPage = () => {
 						<Box>
 							<UzumBankSVG />
 							<Typography variant="subtitle1">
-								Перенаправим в приложение Uzum Bank, где вы
-								сможете оплатить заказ
+								{currentLanguage == "rus"
+									? "Перенаправим в приложение Uzum Bank, где вы сможете оплатить заказ"
+									: "Buyurtmani to'lashingiz mumkin bo'lgan Uzum Bank ilovasiga yo'naltiramiz"}
 							</Typography>
 						</Box>
 					</Box>
@@ -714,7 +800,11 @@ const CreateOrderPage = () => {
 					}}
 				></Box>
 
-				<Typography variant="h2">Введите промокод</Typography>
+				<Typography variant="h2">
+					{currentLanguage == "rus"
+						? "Введите промокод"
+						: "Promo-kodni kiriting"}
+				</Typography>
 				<Input
 					onInput={() => {
 						setPromo(event.currentTarget.value);
@@ -752,7 +842,7 @@ const CreateOrderPage = () => {
 						fontSize: "16px",
 					}}
 				>
-					Применить
+					{currentLanguage == "rus" ? "Применить" : "Qo'llash"}
 				</Button>
 				<Button
 					onClick={handleClosePromoModal}
@@ -765,7 +855,7 @@ const CreateOrderPage = () => {
 						fontSize: "16px",
 					}}
 				>
-					Назад
+					{currentLanguage == "rus" ? "Назад" : "Orqaga"}
 				</Button>
 			</Box>
 
@@ -805,10 +895,13 @@ const CreateOrderPage = () => {
 					}}
 				></Box>
 
-				<Typography variant="h2">Успех</Typography>
+				<Typography variant="h2">
+					{currentLanguage == "rus" ? "Успех" : "Muvaffaqiyat"}
+				</Typography>
 				<Typography variant="h4">
-					Ваш заказ успешно оформлен, чтобы проверить статус заказа
-					перейдите в "Мои заказы"
+					{currentLanguage == "rus"
+						? 'Ваш заказ успешно оформлен, чтобы проверить статус заказа перейдите в "Мои заказы"'
+						: `Buyurtma holatini tekshirish uchun buyurtmangiz muvaffaqiyatli yakunlandi "Mening buyurtmalarim" ga o'ting`}
 				</Typography>
 			</Box>
 		</>

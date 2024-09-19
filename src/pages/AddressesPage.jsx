@@ -14,7 +14,7 @@ import { useState } from "react";
 
 import PlusSVG from "@/assets/MyUserInfoPage/plus.svg?react";
 import AddressConfigSVG from "@/assets/MyUserInfoPage/addressSettings.svg?react";
-import { useAddreses } from "../store";
+import { useAddreses , useLanguage } from "../store";
 
 const AddresesPage = () => {
 	const addressArray = useAddreses((state) => state.addressArray);
@@ -24,6 +24,7 @@ const AddresesPage = () => {
 	const [deleteDialogStatus, setDeleteDialogStatus] = useState(false);
 	const [deleteAddressId, setDeleteAddressId] = useState(null);
 	const [newAddress, setNewAddress] = useState("");
+	const currentLanguage = useLanguage((state) => state.language)
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -58,7 +59,7 @@ const AddresesPage = () => {
 					<IconButton>
 						<PlusSVG />
 					</IconButton>
-					<Typography variant="subtitle1">Добавить новый</Typography>
+					<Typography variant="subtitle1">{currentLanguage == "rus"? "Добавить новый" : "Yangisini qo'shing"}</Typography>
 				</Box>
 				{addressArray.map((item, index) => {
 					return (
@@ -108,10 +109,10 @@ const AddresesPage = () => {
 					},
 				}}
 			>
-				<DialogTitle variant="h2">Добавление нового адреса</DialogTitle>
+				<DialogTitle variant="h2">{currentLanguage == "rus"? "Добавление нового адреса" : "Yangi manzil qo'shish"}</DialogTitle>
 				<DialogContent>
 					<DialogContentText>
-						Введите Адрес , который хотите добавить
+					{currentLanguage == "rus"? "Введите Адрес , который хотите добавить" : "Qo'shmoqchi bo'lgan manzilni kiriting"}
 					</DialogContentText>
 					<TextField
 						onInput={() => setNewAddress(event.target.value)}
@@ -120,14 +121,14 @@ const AddresesPage = () => {
 						required
 						margin="dense"
 						id="name"
-						label="Адрес"
+						label={currentLanguage == "rus"? "Адрес" : "Manzil"}
 						fullWidth
 						variant="standard"
 					/>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={handleClose}>Отмена</Button>
-					<Button type="submit">Добавить</Button>
+					<Button onClick={handleClose}>{currentLanguage == "rus"? "Отмена" : "Bekor qilish"}</Button>
+					<Button type="submit">{currentLanguage == "rus"? "Добавить" : "Qo'shish"}</Button>
 				</DialogActions>
 			</Dialog>
 
@@ -144,11 +145,11 @@ const AddresesPage = () => {
 					},
 				}}
 			>
-				<DialogTitle variant="h2">Удалить адрес?</DialogTitle>
+				<DialogTitle variant="h2">{currentLanguage == "rus"? "Удалить адрес?" : "Manzilni o'chirasizmi?"}</DialogTitle>
 				<DialogContent></DialogContent>
 				<DialogActions>
-					<Button onClick={handleCloseDialog}>Отмена</Button>
-					<Button type="submit">Удалить</Button>
+					<Button onClick={handleCloseDialog}>{currentLanguage == "rus"? "Отмена" : "Bekor qilish"}</Button>
+					<Button sx={{color:"red"}} type="submit">{currentLanguage == "rus"? "Удалить" : "O'chirish"}</Button>
 				</DialogActions>
 			</Dialog>
 		</>

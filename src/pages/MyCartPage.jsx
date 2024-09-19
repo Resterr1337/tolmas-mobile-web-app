@@ -49,7 +49,6 @@ const MyCartPage = () => {
 		}
 	});
 
-
 	const totalCost = cartArray.reduce(
 		(accumulator, item) =>
 			accumulator + item.quantity * some_products[item.productId].price,
@@ -120,7 +119,11 @@ const MyCartPage = () => {
 							},
 						}}
 					/>
-					<Typography>Выбрать всё</Typography>
+					<Typography>
+						{currentLanguage == "rus"
+							? "Выбрать всё"
+							: "Hammasini tanlang"}
+					</Typography>
 				</Box>
 
 				<Button
@@ -137,7 +140,7 @@ const MyCartPage = () => {
 					size={"small"}
 					variant="outlined"
 				>
-					Удалить
+					{currentLanguage == "rus" ? "Удалить" : "O'chirish"}
 				</Button>
 			</Box>
 
@@ -150,7 +153,9 @@ const MyCartPage = () => {
 			>
 				{cartArray.length == 0 ? (
 					<Typography sx={{ my: "5px" }} variant="subtitle1">
-						Ваша корзина пуста
+						{currentLanguage == "rus"
+							? "Ваша корзина пуста"
+							: "Savatingiz bo'sh"}
 					</Typography>
 				) : (
 					cartArray.map((item) => {
@@ -315,7 +320,9 @@ const MyCartPage = () => {
 											size={"small"}
 											variant="outlined"
 										>
-											Удалить
+											{currentLanguage == "rus"
+												? "Удалить"
+												: "O'chirish"}
 										</Button>
 									</Box>
 								</Box>
@@ -367,7 +374,9 @@ const MyCartPage = () => {
 								: formatPrice(totalCost)}{" "}
 							UZS
 						</Typography>
-						<Typography variant="subtitle2">Всего</Typography>
+						<Typography variant="subtitle2">
+							{currentLanguage == "rus" ? "Всего" : "Jami"}
+						</Typography>
 					</Box>
 					<Box
 						onClick={() => {
@@ -380,7 +389,9 @@ const MyCartPage = () => {
 						}}
 					>
 						<Typography color="white" variant="h3">
-							Продолжить
+							{currentLanguage == "rus"
+								? "Продолжить"
+								: "Davom eting"}
 						</Typography>
 					</Box>
 				</Box>

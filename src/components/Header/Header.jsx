@@ -7,7 +7,8 @@ import { useState } from "react";
 import BackSVG from "./HistoryBack.svg?react";
 import ArrowToDownSVG from "./ArrowToDown.svg?react";
 import { useDeliveryWay } from "../../store";
-//
+
+
 const Header = () => {
 	const location = useLocation();
 	const currentLanguage = useLanguage((state) => state.language);
@@ -179,9 +180,10 @@ const Header = () => {
 								</Typography>
 
 								<Box>
-									{deliveryWayArray.map((item, key) => {
+									{deliveryWayArray.map((item, index) => {
 										return (
 											<Box
+											key={index}
 												sx={{
 													display: "flex",
 													alignItems: "center",

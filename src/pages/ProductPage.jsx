@@ -6,7 +6,7 @@ import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
 import { ImageSlider } from "../components/ProductPage/ImageSlider.jsx";
 import { formatPrice } from "../utils/priceFormatter.js";
 import { some_products } from "../data.js";
-import {useLanguage} from "@/store.js"
+import { useLanguage } from "@/store.js";
 
 import CartSVG from "@/assets/ProductPage/cart.svg?react";
 import BagSVG from "@/assets/ProductPage/bag.svg?react";
@@ -14,24 +14,22 @@ import AddSVG from "@/assets/ProductPage/next.svg?react";
 import SubstractSVG from "@/assets/ProductPage/prev.svg?react";
 import { useCart } from "../store.js";
 
-
 const ProductPage = () => {
-	const { cartArray, addToCart} = useCart()
+	const { cartArray, addToCart } = useCart();
 	const [isActivated, setIsActivated] = useState(false);
 	const { id: productId } = useParams();
 	const [quantityOrder, setQuantityOrder] = useState(0);
 
 	const productInfo = some_products[parseInt(productId)];
-	const currentLanguage = useLanguage((state) => state.language)
+	const currentLanguage = useLanguage((state) => state.language);
 
 	// #Добавить реализацию добавления товара в корзину
 	const HandleClickOnAddToCart = (productInfo) => {
 		if (quantityOrder) {
-			setIsActivated(true)
-			addToCart(productInfo.id, quantityOrder)
+			setIsActivated(true);
+			addToCart(productInfo.id, quantityOrder);
 		}
 	};
-
 
 	return (
 		<>
@@ -46,7 +44,7 @@ const ProductPage = () => {
 			{/* Скидка */}
 			{productInfo.discount ? (
 				<Typography sx={{ my: "4px" }} color="#677697" variant="h4">
-					Скидка{" "}
+					{currentLanguage == "rus" ? "Скидка" : "Chegirma"}{" "}
 					{productInfo.discount.includes("%")
 						? productInfo.discount
 						: `${formatPrice(productInfo.discount)} UZS`}
@@ -78,7 +76,8 @@ const ProductPage = () => {
 
 			{/* Кол-во в наличие */}
 			<Typography sx={{ my: "3px" }} variant="quantity">
-				В наличие: {productInfo.quantity} шт
+				{currentLanguage == "rus" ? "В наличие: " : "Mavjudligi: "}{" "}
+				{productInfo.quantity} шт
 			</Typography>
 
 			{/* Кол-во покупок на этой неделе */}
@@ -104,17 +103,20 @@ const ProductPage = () => {
 					}}
 				>
 					<Typography fontWeight={400} variant="subtitle1">
-						{productInfo.quantityWeekSales} штук
+						{productInfo.quantityWeekSales}{" "}
+						{currentLanguage == "rus" ? " штук" : " dona"}
 					</Typography>
 					<Typography variant="subtitle1">
-						Купили на этой неделе
+						{currentLanguage == "rus"
+							? "Купили на этой неделе"
+							: "Bu hafta sotib olindi"}
 					</Typography>
 				</Box>
 			</Box>
 
 			{/* Описание */}
 			<Typography sx={{ my: "6px" }} variant="h2">
-				Описание
+				{currentLanguage == "rus" ? "Описание" : "Tavsif"}
 			</Typography>
 
 			<Typography sx={{ my: "6px" }} variant="subtitle1">
@@ -123,7 +125,7 @@ const ProductPage = () => {
 
 			{/* Характеристики */}
 			<Typography sx={{ my: "6px" }} variant="h2">
-				Характеристики
+				{currentLanguage == "rus" ? "Характеристики" : "Xususiyatlari"}
 			</Typography>
 
 			{productInfo.characteristics[currentLanguage].map((item, index) => {
@@ -260,14 +262,18 @@ const ProductPage = () => {
 									htmlColor="white"
 								/>
 								<Typography color="white" variant="h3">
-									Успешно добавлено в Корзину
+									{currentLanguage == "rus"
+										? "Успешно добавлен в Корзину"
+										: "Savatga muvaffaqiyatli qo'shildi"}
 								</Typography>
 							</>
 						) : (
 							<>
 								<CartSVG></CartSVG>
 								<Typography color="white" variant="h3">
-									Добавить в корзину
+									{currentLanguage == "rus"
+										? "Добавить в корзину"
+										: "Savatga qo'shing"}
 								</Typography>
 							</>
 						)}

@@ -15,8 +15,10 @@ import WishesSVG from "@/assets/NavigationPanel/wishes.svg?react";
 
 import "@/components/NavigationPanel/NavigationPanel.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useLanguage } from "../../store";
 
 const NavigationPanel = () => {
+	const currentLanguage = useLanguage((state) => state.language)
 	const [value, setValue] = useState(useLocation().pathname);
 	const navigateFunc = useNavigate();
 
@@ -47,7 +49,7 @@ const NavigationPanel = () => {
 						padding: "0 0",
 					}}
 					value={"/"}
-					label={<Typography variant="h6">Главная</Typography>}
+					label={<Typography variant="h6">{currentLanguage=="rus"? "Главная": "Bosh sahifa"}</Typography>}
 					icon={<HomeSVG />}
 				/>
 				<BottomNavigationAction
@@ -55,7 +57,7 @@ const NavigationPanel = () => {
 						padding: "0 0",
 					}}
 					value={"/mywishes"}
-					label={<Typography variant="h6">Мои желания</Typography>}
+					label={<Typography variant="h6">{currentLanguage=="rus"? "Мои желания": "Istaklarim"}</Typography>}
 					icon={<WishesSVG />}
 				/>
 				<BottomNavigationAction
@@ -63,7 +65,7 @@ const NavigationPanel = () => {
 						padding: "0 0",
 					}}
 					value={"/myorders"}
-					label={<Typography variant="h6">Мои заказы</Typography>}
+					label={<Typography variant="h6">{currentLanguage=="rus"? "Мои заказы": "Buyurtmalarim"}</Typography>}
 					icon={<ShoppingBagSVG />}
 				/>
 				<BottomNavigationAction
@@ -71,15 +73,15 @@ const NavigationPanel = () => {
 						padding: "0 0",
 					}}
 					value={"/mycart"}
-					label={<Typography variant="h6">Корзина</Typography>}
-					icon={<ShoppingCartSVG />}
+					label={<Typography variant="h6">{currentLanguage=="rus"? "Корзина": "Savat"}</Typography>}
+					icon={<ShoppingCartSVG style={{transform: "translateX(-3px)"}} />}
 				/>
 				<BottomNavigationAction
 					sx={{
 						padding: "0 0",
 					}}
 					value={"/userinfo"}
-					label={<Typography variant="h6">Аккаунт</Typography>}
+					label={<Typography variant="h6">{currentLanguage=="rus"? "Аккаунт": "Hisob"}</Typography>}
 					icon={<UserSVG />}
 				/>
 			</BottomNavigation>

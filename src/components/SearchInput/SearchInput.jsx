@@ -94,7 +94,7 @@ const SearchInput = ({ prevValue }) => {
 							},
 						}}
 						fullWidth={true}
-						placeholder="Поиск товаров"
+						placeholder={currentLanguage == "rus"? "Поиск товаров" : "Tovarlarni qidirish"}
 						value={value}
 					></Input>
 

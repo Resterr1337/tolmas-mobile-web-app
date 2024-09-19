@@ -1,10 +1,11 @@
 import { Box, Typography, Input, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
-import { useUser } from "../store";
+import { useLanguage, useUser } from "../store";
 import { useState } from "react";
 import dayjs from "dayjs";
 
 const UserSettingsPage = () => {
+	const currentLanguage = useLanguage((state) => state.language)
 	const userSettings = useUser((state) => state.userSettings);
 	const changeField = useUser((state) => state.changeField);
 	const [gender, setGender] = useState(userSettings.gender);
@@ -50,7 +51,7 @@ const UserSettingsPage = () => {
 					my: "5px",
 				}}
 			>
-				<Typography variant="h2">Выберите пол</Typography>
+				<Typography variant="h2">{currentLanguage=="rus"? "Выберите пол" : "Zaminni tanlang"}</Typography>
 				<Box
 					sx={{
 						width: "100%",
@@ -79,7 +80,7 @@ const UserSettingsPage = () => {
 						}}
 						variant="h3"
 					>
-						Мужской
+						{currentLanguage=="rus"? "Мужской" : "Erkak"}
 					</Typography>
 					<Typography variant="h3">|</Typography>
 					<Typography
@@ -98,7 +99,7 @@ const UserSettingsPage = () => {
 						}}
 						variant="h3"
 					>
-						Женский
+						{currentLanguage=="rus"? "Женский" : "Ayol"}
 					</Typography>
 				</Box>
 			</Box>
@@ -124,14 +125,14 @@ const UserSettingsPage = () => {
 						gap: "10px",
 					}}
 				>
-					<Typography variant="h2">Имя</Typography>
+					<Typography variant="h2">{currentLanguage=="rus"? "Имя" : "Ism"}</Typography>
 					<TextField
 						onInput={() => {
 							setName(event.target.value);
 							changeField("name", event.target.value);
 						}}
 						value={name}
-						placeholder="Имя"
+						placeholder={currentLanguage=="rus"? "Имя" : "Ism"}
 						variant="outlined"
 					></TextField>
 				</Box>
@@ -143,14 +144,14 @@ const UserSettingsPage = () => {
 						gap: "10px",
 					}}
 				>
-					<Typography variant="h2">Фамилия</Typography>
+					<Typography variant="h2">{currentLanguage=="rus"? "Фамилия" : "Familiyasi"}</Typography>
 					<TextField
 						onInput={() => {
 							setSurName(event.target.value);
 							changeField("surName", event.target.value);
 						}}
 						value={surName}
-						placeholder="Фамилия"
+						placeholder={currentLanguage=="rus"? "Фамилия" : "Familiyasi"}
 						variant="outlined"
 					></TextField>
 				</Box>
@@ -170,7 +171,7 @@ const UserSettingsPage = () => {
 					},
 				}}
 			>
-				<Typography variant="h2">Дата рожденья</Typography>
+				<Typography variant="h2">{currentLanguage=="rus"? "Дата рожденья" : "Tug'ilgan sana"}</Typography>
 				<DatePicker
 					disableFuture
 					onChange={() => {
@@ -183,7 +184,7 @@ const UserSettingsPage = () => {
 					defaultValue={ dayjs(dateOfBirth, "MM/DD/YYYY")}
 
 					sx={{ width: "100%" }}
-					placeholder="Дата рожденья"
+					placeholder={currentLanguage=="rus"? "Дата рожденья" : "Tug'ilgan sana"}
 				/>
 			</Box>
 
@@ -229,7 +230,7 @@ const UserSettingsPage = () => {
 					},
 				}}
 			>
-				<Typography variant="h2">Регион</Typography>
+				<Typography variant="h2">{currentLanguage=="rus"? "Регион" : "Mintaqa"}</Typography>
 				<TextField
 					fullWidth
 					onInput={() => {
@@ -238,7 +239,7 @@ const UserSettingsPage = () => {
 					}}
 					value={region}
 					variant="outlined"
-					placeholder="Регион"
+					placeholder={currentLanguage=="rus"? "Регион" : "Mintaqa"}
 				></TextField>
 			</Box>
 
@@ -256,7 +257,7 @@ const UserSettingsPage = () => {
 					},
 				}}
 			>
-				<Typography variant="h2">Дата регистрации</Typography>
+				<Typography variant="h2">{currentLanguage=="rus"? "Дата регистрации" : "Ro'yxatdan o'tish sanasi"}</Typography>
 				<TextField
 					fullWidth
 					readonly

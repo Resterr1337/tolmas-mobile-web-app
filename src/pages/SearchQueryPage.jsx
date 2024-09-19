@@ -29,7 +29,7 @@ const SearchQueryPage = () => {
 				<Typography color={"#21D399"} variant="h2">
 					{filteredProducts.length}
 				</Typography>
-				<Typography variant="h3">Результата показано</Typography>
+				<Typography variant="h3">{currentLanguage == "rus"? "Результата показано" : "Natija ko'rsatilgan"}</Typography>
 			</Box>
 
 			<Box

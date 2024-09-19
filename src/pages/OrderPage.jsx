@@ -55,7 +55,9 @@ const OrderPage = () => {
 				}}
 			>
 				<Typography fontSize={"0.85rem"} variant="subtitle1">
-					Адрес доставки
+					{currentLanguage == "rus"
+						? "Адрес доставки"
+						: "Yetkazib berish manzili"}
 				</Typography>
 				<Typography variant="h2">
 					{orderObject.deliveryAddress}
@@ -66,7 +68,9 @@ const OrderPage = () => {
 				<>
 					<Box sx={{ padding: "10px" }}>
 						<Typography>
-							Для получения товара, покажите QR код кассиру
+							{currentLanguage == "rus"
+								? "Для получения товара, покажите QR код кассиру"
+								: "Mahsulotni olish uchun QR kodini kassirga ko'rsating"}
 						</Typography>
 						<Button
 							onClick={() => setIsQRCodeModalOpen(true)}
@@ -81,18 +85,20 @@ const OrderPage = () => {
 								my: "5px",
 							}}
 						>
-							Показать QR код
+							{currentLanguage == "rus"
+								? "Показать QR код"
+								: "QR kodini ko'rsatish"}
 						</Button>
 					</Box>
 					{/* Модалка с QR кодом */}
 					<Box
-                        onClick={() => setIsQRCodeModalOpen(false)}
+						onClick={() => setIsQRCodeModalOpen(false)}
 						sx={{
 							position: "fixed",
 							background: "white",
 							borderRadius: "10px",
 							left: "50%",
-                            transform:"translateX(-50%) translateY(-100%)",
+							transform: "translateX(-50%) translateY(-100%)",
 							bottom: isQRCodeModalOpen ? "0%" : "-300%",
 							zIndex: "22",
 							width: "300px",
@@ -100,8 +106,8 @@ const OrderPage = () => {
 							padding: "20px",
 							display: "flex",
 							flexDirection: "column",
-                            alignItems:"center",
-                            justifyContent:"space-between",
+							alignItems: "center",
+							justifyContent: "space-between",
 							gap: "10px",
 							transition: "all 500ms",
 							boxShadow: isQRCodeModalOpen
@@ -109,27 +115,30 @@ const OrderPage = () => {
 								: "none",
 						}}
 					>
-                        <Box
-                            sx={{
-                                width:"250px",
-                                height:"250px",
-                                background:`url("https://s3-alpha-sig.figma.com/img/75b3/f471/47cd74d49d353d05fd1428b1bbdbdbec?Expires=1727654400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c~xYxL0crWBD98CYuhgsTrDgeWT1rMv4dzwTDvol41e6qNUDbQuVZHYb-1EF5C8B2sx02zRdvWmI0v8HURnlnZcfSdeIAGOdGas7mMMbbeJeYi2FZ5ZJfZRfXGbtjnciDNhLeHZN1ZIoesBomTgIrEN1Q-FH6VGMEnXC5t~mzZZzzAVO~99eijt0CDFEZxHCglH4jqS8Vm19w6ecY9MFXbmmGQoC0Y61oqvHuHbBLk95Tfl-7X8iC9VDUyaPe2pdbxUl8WNjm3PP2OaS01YSB8-4fUeKCanXubCP4lLZK0h~QP8bb5vkjetGyg9Al98G1fOKLQSWRO9pVni1bEH1ng__")`,
-                                backgroundPosition:"50% 50%",
-                                backgroundRepeat:"no-repeat",
-                                backgroundSize:"cover",
-                            }}
-                        >
-                        </Box>
+						<Box
+							sx={{
+								width: "250px",
+								height: "250px",
+								background: `url("https://s3-alpha-sig.figma.com/img/75b3/f471/47cd74d49d353d05fd1428b1bbdbdbec?Expires=1727654400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c~xYxL0crWBD98CYuhgsTrDgeWT1rMv4dzwTDvol41e6qNUDbQuVZHYb-1EF5C8B2sx02zRdvWmI0v8HURnlnZcfSdeIAGOdGas7mMMbbeJeYi2FZ5ZJfZRfXGbtjnciDNhLeHZN1ZIoesBomTgIrEN1Q-FH6VGMEnXC5t~mzZZzzAVO~99eijt0CDFEZxHCglH4jqS8Vm19w6ecY9MFXbmmGQoC0Y61oqvHuHbBLk95Tfl-7X8iC9VDUyaPe2pdbxUl8WNjm3PP2OaS01YSB8-4fUeKCanXubCP4lLZK0h~QP8bb5vkjetGyg9Al98G1fOKLQSWRO9pVni1bEH1ng__")`,
+								backgroundPosition: "50% 50%",
+								backgroundRepeat: "no-repeat",
+								backgroundSize: "cover",
+							}}
+						></Box>
 
-                        <Typography variant="h1">4378</Typography>
-                    </Box>
+						<Typography variant="h1">4378</Typography>
+					</Box>
 				</>
 			) : (
 				<></>
 			)}
 
 			<Box sx={{ padding: "10px" }}>
-				<Typography variant="h2">Детали заказа</Typography>
+				<Typography variant="h2">
+					{currentLanguage == "rus"
+						? "Детали заказа"
+						: "Buyurtma tafsilotlari"}
+				</Typography>
 				<Box>
 					{orderObject.products.map((product) => {
 						return (
@@ -173,7 +182,7 @@ const OrderPage = () => {
 											}
 										</Typography>
 										<Typography>
-											{product.quantity} шт
+											{product.quantity} {currentLanguage == "rus"?" шт.":" dona"}
 										</Typography>
 									</Box>
 								</Box>
@@ -207,7 +216,11 @@ const OrderPage = () => {
 								padding: "10px",
 							}}
 						>
-							<Typography variant="h2">Скидка</Typography>
+							<Typography variant="h2">
+								{currentLanguage == "rus"
+									? "Скидка"
+									: "Chegirma"}
+							</Typography>
 							<Typography variant="h2">
 								-
 								{formatPrice(
@@ -231,7 +244,7 @@ const OrderPage = () => {
 								fontSize={"1.125rem"}
 								variant="subtitle1"
 							>
-								Всего
+								{currentLanguage == "rus" ? "Всего" : "Jami"}
 							</Typography>
 							<Typography variant="h2">
 								{formatPrice(orderObject.totalCostWithDiscount)}{" "}
@@ -241,7 +254,6 @@ const OrderPage = () => {
 					</>
 				) : (
 					<>
-						{" "}
 						<Box
 							sx={{
 								display: "flex",
@@ -256,7 +268,7 @@ const OrderPage = () => {
 								fontSize={"1.125rem"}
 								variant="subtitle1"
 							>
-								Всего
+								{currentLanguage == "rus"?"Всего":"Jami"}
 							</Typography>
 							<Typography variant="h2">
 								{formatPrice(orderObject.totalCost)} UZS
@@ -294,7 +306,9 @@ const OrderPage = () => {
 								textTransform: "none",
 							}}
 						>
-							Связаться с курьером
+							{currentLanguage == "rus"
+								? "Связаться с курьером"
+								: "Kuryer bilan bog'laning"}
 						</Button>
 					</Box>
 
@@ -335,7 +349,9 @@ const OrderPage = () => {
 								borderRadius: "20px",
 							}}
 						></Box>
-						<Typography variant="h2">Данные курьера</Typography>
+						<Typography variant="h2">{currentLanguage == "rus"
+								? "Данные курьерам"
+								: "Kuryer ma'lumotlari"}</Typography>
 						<Box>
 							<Box
 								sx={{
@@ -346,7 +362,9 @@ const OrderPage = () => {
 								}}
 							>
 								<Typography variant="h3">
-									Марка машины:
+								{currentLanguage == "rus"
+								? "Марка машины:"
+								: "Avtomobil markasi:"}
 								</Typography>
 								<Typography variant="h3">Lesseti</Typography>
 							</Box>
@@ -359,7 +377,9 @@ const OrderPage = () => {
 								}}
 							>
 								<Typography variant="h3">
-									Номер машины:
+								{currentLanguage == "rus"
+								? "Номер машины:"
+								: "Avtomobil raqami:"}
 								</Typography>
 								<Typography variant="h3">
 									Z 777 ZZ 01
@@ -374,7 +394,9 @@ const OrderPage = () => {
 								}}
 							>
 								<Typography variant="h3">
-									Номер курьера:
+								{currentLanguage == "rus"
+								? "Номер курьера:"
+								: "Kuryer raqami:"}
 								</Typography>
 								<Typography variant="h3">
 									+998 77 777 777 77
@@ -393,7 +415,9 @@ const OrderPage = () => {
 								textTransform: "none",
 							}}
 						>
-							Позвонить
+							{currentLanguage == "rus"
+								? "Позвонить"
+								: "Qo'ng'iroq qiling"}
 						</Button>
 					</Box>
 				</>
@@ -426,10 +450,15 @@ const OrderPage = () => {
 							textTransform: "none",
 						}}
 					>
-						Отменить заказ
+						{currentLanguage == "rus"
+								? "Отменить заказ"
+								: "Buyurtmani bekor qilish"}
+						
 					</Button>
 					<Typography variant="subtitle2">
-						В течении 2 часов вы можете отменить заказ
+					{currentLanguage == "rus"
+								? "В течении 2 часов вы можете отменить заказ"
+								: "2 soat ichida siz buyurtmani bekor qilishingiz mumkin"}
 					</Typography>
 				</Box>
 			) : (

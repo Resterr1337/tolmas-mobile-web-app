@@ -39,7 +39,11 @@ const SubCategoriesPage = () => {
 				}}
 			>
 				<BackSVG></BackSVG>
-				<Typography>Все категории</Typography>
+				<Typography>
+					{currentLanguage == "rus"
+						? "Все категории"
+						: "Barcha toifalar"}
+				</Typography>
 			</Box>
 
 			<Box

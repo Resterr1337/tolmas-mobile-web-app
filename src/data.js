@@ -214,8 +214,8 @@ const some_promo = [
 			},
 			uzb: {
 				topSideText:
-					"На узб Заканчиваем неделю с большими скидками успей купить!",
-				centerText: "Чёрная пятница",
+					"Biz haftani katta chegirmalar bilan yakunlaymiz, sotib olishga vaqt toping!",
+				centerText: "Qora juma",
 				bottomSideText: "-50%",
 			},
 		},
@@ -230,7 +230,7 @@ const some_promo = [
 				bottomSideText: "-50%",
 			},
 			uzb: {
-				topSideText: "На узб Скидка на мужскую парфюмерию",
+				topSideText: "Erkaklar parfyumeriyasiga chegirma",
 				bottomSideText: "-50%",
 			},
 		},
@@ -246,7 +246,7 @@ const some_promo = [
 				bottomSideText: "-25%",
 			},
 			uzb: {
-				topSideText: "Осенние скидки",
+				topSideText: "Kuzgi chegirmalar",
 				centerText: "",
 				bottomSideText: "-25%",
 			},

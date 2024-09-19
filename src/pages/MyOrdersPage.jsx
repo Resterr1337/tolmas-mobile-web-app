@@ -12,7 +12,7 @@ import { useState } from "react";
 const MyOrdersPage = () => {
 	const ordersArray = useOrders((state) => state.ordersArray);
 	const currentLanguage = useLanguage((state) => state.language);
-	const NavigateFunc = useNavigate()
+	const NavigateFunc = useNavigate();
 
 	const [isMoreOpen, setIsMoreOpen] = useState(
 		Object.fromEntries(ordersArray.map((item) => (item = [item.id, false])))
@@ -22,9 +22,9 @@ const MyOrdersPage = () => {
 
 	const handleOpenOrderPage = (item, event) => {
 		if (event.target.id !== "functionalObject") {
-			NavigateFunc(`/order/${item.id}`)
+			NavigateFunc(`/order/${item.id}`);
 		}
-	}
+	};
 
 	return (
 		<>
@@ -64,7 +64,9 @@ const MyOrdersPage = () => {
 						}}
 						variant="h3"
 					>
-						Активные
+						{currentLanguage == "rus"
+							? "Активные"
+							: "Faol buyurtmalar"}
 					</Typography>
 					<Typography variant="h3">|</Typography>
 					<Typography
@@ -83,19 +85,25 @@ const MyOrdersPage = () => {
 						}}
 						variant="h3"
 					>
-						История
+						{currentLanguage == "rus"
+							? "История"
+							: "Buyurtmalar tarixi"}
 					</Typography>
 				</Box>
 			</Box>
 
 			{isHistory ? (
-				<Typography variant="h2">Ваша история заказов пуста</Typography>
+				<Typography variant="h2">
+					{currentLanguage == "rus"
+						? "Ваша история заказов пуста"
+						: "Sizning buyurtma tarixingiz bo'sh"}
+				</Typography>
 			) : (
 				ordersArray.map((item) => {
 					return (
 						<Box
 							onClick={() => {
-								handleOpenOrderPage(item, event)
+								handleOpenOrderPage(item, event);
 							}}
 							sx={{
 								display: "flex",
@@ -105,7 +113,7 @@ const MyOrdersPage = () => {
 								background: "#F4F7F9",
 								borderRadius: "10px",
 								transition: "all 500ms",
-								my:"10px"
+								my: "10px",
 							}}
 							key={nanoid()}
 						>
@@ -116,7 +124,10 @@ const MyOrdersPage = () => {
 								}}
 								variant="h2"
 							>
-								ID заказа: {item.id}
+								{currentLanguage == "rus"
+									? "ID заказа"
+									: "Buyurtma ID"}
+								: {item.id}
 							</Typography>
 							<Box
 								sx={{
@@ -126,7 +137,11 @@ const MyOrdersPage = () => {
 									width: "100%",
 								}}
 							>
-								<Typography>Статус</Typography>
+								<Typography>
+									{currentLanguage == "rus"
+										? "Статус"
+										: "Holati"}
+								</Typography>
 								<Typography>{item.status}</Typography>
 							</Box>
 							<Box
@@ -137,7 +152,11 @@ const MyOrdersPage = () => {
 									width: "100%",
 								}}
 							>
-								<Typography>Время создания</Typography>
+								<Typography>
+									{currentLanguage == "rus"
+										? "Время создания"
+										: "Yaratilish vaqti"}
+								</Typography>
 								<Typography>{item.createOrderTime}</Typography>
 							</Box>
 							<Box
@@ -148,7 +167,11 @@ const MyOrdersPage = () => {
 									width: "100%",
 								}}
 							>
-								<Typography>Время доставки заказа</Typography>
+								<Typography>
+									{currentLanguage == "rus"
+										? "Время доставки заказа"
+										: "Buyurtmani etkazib berish vaqti"}
+								</Typography>
 								<Typography>
 									{item.deliveryOrderTime}
 								</Typography>
@@ -161,7 +184,11 @@ const MyOrdersPage = () => {
 									width: "100%",
 								}}
 							>
-								<Typography>Цена</Typography>
+								<Typography>
+									{currentLanguage == "rus"
+										? "Цена"
+										: "Narxi"}
+								</Typography>
 								<Typography>
 									{formatPrice(item.totalCost)} UZS
 								</Typography>
@@ -184,8 +211,18 @@ const MyOrdersPage = () => {
 											Object.fromEntries(
 												ordersArray.map((i) =>
 													item.id == i.id
-														? (i = [i.id , !isMoreOpen[item.id],])
-														: (i = [i.id , isMoreOpen[i.id],])
+														? (i = [
+																i.id,
+																!isMoreOpen[
+																	item.id
+																],
+														  ])
+														: (i = [
+																i.id,
+																isMoreOpen[
+																	i.id
+																],
+														  ])
 												)
 											)
 										);
@@ -197,8 +234,15 @@ const MyOrdersPage = () => {
 										justifyContent: "space-between",
 									}}
 								>
-									<Typography id="functionalObject" color="#2588FF" variant="h2">
-										{item.products.length} товар
+									<Typography
+										id="functionalObject"
+										color="#2588FF"
+										variant="h2"
+									>
+										{item.products.length}{" "}
+										{currentLanguage == "rus"
+											? "товар"
+											: "mahsulot"}
 									</Typography>
 									<IconButton
 										id="functionalObject"
@@ -277,7 +321,7 @@ const MyOrdersPage = () => {
 														}
 													</Typography>
 													<Typography>
-														{product.quantity} шт
+														{product.quantity} {currentLanguage == "rus"? "шт.": "dona"}
 													</Typography>
 													<Typography variant="h2">
 														{formatPrice(

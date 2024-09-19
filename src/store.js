@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { nanoid } from "nanoid";
+import { some_products } from "./data";
 
 const useLanguage = create((set) => ({
 	language: "rus",
@@ -206,6 +207,7 @@ const useCart = create((set, get) => ({
 					productId: productId,
 					quantity: quantity,
 					id: nanoid(),
+					discount: some_products[productId].discount
 				},
 			],
 		});

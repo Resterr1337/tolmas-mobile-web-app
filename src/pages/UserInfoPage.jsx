@@ -8,11 +8,12 @@ import AboutCompanySVG from "@/assets/MyUserInfoPage/aboutCompany.svg?react";
 import ChangeLanguageSVG from "@/assets/MyUserInfoPage/changeLanguage.svg?react";
 import QuitSVG from "@/assets/MyUserInfoPage/quit.svg?react";
 import FeedBackSVG from "@/assets/MyUserInfoPage/feedBack.svg?react";
-import { useUser } from "../store";
+import { useLanguage, useUser } from "../store";
 
 const UserInfoPage = () => {
+	const currentLanguage = useLanguage((state) => state.language);
 	const NavigateFunc = useNavigate();
-	const userSettings = useUser((state) => state.userSettings)
+	const userSettings = useUser((state) => state.userSettings);
 
 	return (
 		<Box sx={{ display: "flex", flexDirection: "column", gap: "5px" }}>
@@ -46,7 +47,9 @@ const UserInfoPage = () => {
 							gap: "5px",
 						}}
 					>
-						<Typography variant="h2">{userSettings.name} {userSettings.surName}</Typography>
+						<Typography variant="h2">
+							{userSettings.name} {userSettings.surName}
+						</Typography>
 						<Typography variant="subtitle1">
 							+998 33 999 99 99
 						</Typography>
@@ -68,7 +71,9 @@ const UserInfoPage = () => {
 				>
 					<MyOrdersSVG />
 					<Typography fontSize="1.125rem" variant="h4">
-						Мои заказы
+						{currentLanguage == "rus"
+							? "Мои заказы"
+							: "Mening buyurtmalarim"}
 					</Typography>
 				</Box>
 				<Box
@@ -83,7 +88,9 @@ const UserInfoPage = () => {
 				>
 					<MyAdressSVG />
 					<Typography fontSize="1.125rem" variant="h4">
-						Мои адреса
+						{currentLanguage == "rus"
+							? "Мои адреса"
+							: "Mening manzillarim"}
 					</Typography>
 				</Box>
 				<Box
@@ -98,7 +105,9 @@ const UserInfoPage = () => {
 				>
 					<AboutCompanySVG />
 					<Typography fontSize="1.125rem" variant="h4">
-						О компании
+						{currentLanguage == "rus"
+							? "О компании"
+							: "Kompaniya haqida"}
 					</Typography>
 				</Box>
 				<Box
@@ -113,7 +122,9 @@ const UserInfoPage = () => {
 				>
 					<ChangeLanguageSVG />
 					<Typography fontSize="1.125rem" variant="h4">
-						Смена языка
+						{currentLanguage == "rus"
+							? "Смена языка"
+							: "Tilni o'zgartirish"}
 					</Typography>
 				</Box>
 				<Box
@@ -127,7 +138,7 @@ const UserInfoPage = () => {
 				>
 					<QuitSVG />
 					<Typography fontSize="1.125rem" variant="h4">
-						Выход
+						{currentLanguage == "rus" ? "Выход" : "Chiqish"}
 					</Typography>
 				</Box>
 			</Box>
@@ -152,7 +163,7 @@ const UserInfoPage = () => {
 						gap: "2px",
 					}}
 				>
-					<Typography variant="subtitle1">Для связи</Typography>
+					<Typography variant="subtitle1">{currentLanguage == "rus" ? "Для связи" : "Aloqa uchun"}</Typography>
 					<Typography variant="h3">+998 33 999 99 99</Typography>
 				</Box>
 			</Box>
