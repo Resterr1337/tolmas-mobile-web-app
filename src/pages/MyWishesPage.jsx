@@ -7,9 +7,9 @@ import { some_products } from "../data";
 
 const MyWishesPage = () => {
 	const { wishList } = useWishList();
-	const currentLanguage = useLanguage((state) => {
+	const currentLanguage = useLanguage((state) => 
 		state.language;
-	});
+	);
 
 	return (
 		<Box
